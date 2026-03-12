@@ -7,7 +7,7 @@ class CreateRecipes < ActiveRecord::Migration[7.1]
       t.text :keywords
       t.integer :calories
       t.text :allergens
-      # t.references :meal_plan, null: false, foreign_key: true
+      t.references :meal_plan, null: true, foreign_key: true
 
       t.timestamps
     end
