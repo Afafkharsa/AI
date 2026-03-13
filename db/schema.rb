@@ -28,9 +28,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_12_202848) do
     t.text "keywords"
     t.integer "calories"
     t.text "allergens"
-    t.bigint "meal_plan_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "meal_plan_id", null: false
     t.index ["meal_plan_id"], name: "index_recipes_on_meal_plan_id"
   end
 
