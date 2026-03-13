@@ -17,9 +17,26 @@ puts "Creating users..."
 user = User.create!(email: "famble@test.com", password: "123456")
 
 puts "Creating meal plans..."
-meal_plan_1 = MealPlan.create!(date: Date.today, meal_type: "lunch")
-meal_plan_2 = MealPlan.create!(date: Date.today, meal_type: "dinner")
-meal_plan_3 = MealPlan.create!(date: Date.today + 1, meal_type: "lunch")
+meal_plan_1 = MealPlan.create!(
+  date: Date.today,
+  meal_type: "lunch",
+  meal: "Chickpea Salad",
+  user: user
+)
+
+meal_plan_2 = MealPlan.create!(
+  date: Date.today,
+  meal_type: "dinner",
+  meal: "Pasta with Tomato Sauce",
+  user: user
+)
+
+meal_plan_3 = MealPlan.create!(
+  date: Date.today + 1,
+  meal_type: "lunch",
+  meal: "Grilled Chicken Bowl",
+  user: user
+)
 
 puts "Creating recipes..."
 Recipe.create!(
