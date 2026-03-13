@@ -9,18 +9,17 @@ class MealPlansController < ApplicationController
     @meal_plan = MealPlan.find(params[:id])
   end
 
-  def create
-    @meal_plan = current_user.meal_plan.new(meal_plan_params)
-    if @meal_plan.save
-      redirect_to meal_plan_path(@meal_plan)
-    else
-      render :new, status: :unprocessable_entity
-    end
+  def create_daily
+
+  end
+
+  def create_weekly
+
   end
 
   private
 
   def meal_plan_params
-    params.requir(:meal_plan).permit(:date, :meal_type, :photo, :user_id)
+    params.requir(:meal_plan).permit(:date, :meal,:meal_type, :photo, :user_id)
   end
 end
