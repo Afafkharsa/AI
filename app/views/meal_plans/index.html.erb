@@ -1,0 +1,32 @@
+
+<div class="container">
+  <h1>My meal plans</h1>
+
+  <div class="container">
+
+    <h3>Today's meal plans</h3>
+    <% @today_meals.each do |meal| %>
+      <h4><%= meal.date %></h4>
+      <ul>
+        <li>
+          Recipes
+        </li>
+      </ul>
+    <% end %>
+  </div>
+
+
+  <div class="container">
+  <h3>This week meal plans</h3>
+
+  <% @weekly_meals.each do |meal| %>
+    <h4><%= meal.date %></h4>
+    <ul>
+      <li>
+        Recipes
+      </li>
+    </ul>
+  <% end %>
+  </div>
+
+</div>
