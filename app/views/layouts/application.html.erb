@@ -11,27 +11,15 @@
   </head>
 
   <body>
-      <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
+    <%= link_to "Skip to main content", "#main-content", class: "visually-hidden-focusable" %>
+    <header>
+      <%= render "shared/navbar" %> <!-- 👈 Add this for navbar -->
+    </header>
 
-        <%= link_to "🥗 AI Meal plan", root_path, class: "navbar-brand fw-bold" %>
+    <main id="main-content">
+      <%= yield %>
+    </main>
 
-        <div class="d-flex gap-2">
-          <% if user_signed_in? %>
-            <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-secondary btn-sm" %>
-          <% else %>
-            <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-primary btn-sm" %>
-            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-sm" %>
-          <% end %>
-        </div>
-
-      </div>
-    </nav>
-
-    <div class="container">
-      <%= content_tag :div, flash[:notice], class: "alert alert-info mt-2" if flash[:notice] %>
-      <%= content_tag :div, flash[:alert], class: "alert alert-warning mt-2" if flash[:alert] %>
-    </div>
-    <%= yield %>
+    <%= render "shared/flashes" %>
   </body>
 </html>
