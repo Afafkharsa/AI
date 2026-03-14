@@ -1,2 +1,51 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<!-- Hero Section -->
+<div class="container text-center py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <h1 class="display-4 fw-bold">Your personal AI <br> meal planner 🥗</h1>
+
+      <p class="lead text-muted mt-3">
+        Chat with our AI chef to discover recipes, build weekly meal plans
+        and track your calories — all in one place.
+      </p>
+
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "See how it works", "#features", class: "btn btn-outline-secondary btn-lg" %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="container py-5" id="features">
+  <div class="row g-4 text-center">
+
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm p-4">
+        <div class="fs-1">🤖</div>
+        <h5 class="fw-bold mt-3">Chat with AI</h5>
+        <p class="text-muted">Ask anything — recipes, substitutions, nutrition advice.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm p-4">
+        <div class="fs-1">📅</div>
+        <h5 class="fw-bold mt-3">Weekly Meal Plans</h5>
+        <p class="text-muted">Generate a full 7-day meal plan tailored to your goals.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm p-4">
+        <div class="fs-1">🔥</div>
+        <h5 class="fw-bold mt-3">Calorie Tracking</h5>
+        <p class="text-muted">Know exactly what's in every recipe. No guesswork.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
