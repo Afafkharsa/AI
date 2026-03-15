@@ -5,7 +5,9 @@
   <p><%= @recipe.keywords %></p>
 
   <h3>Allergens</h3>
-  <p><%= @recipe.allergens %></p>
+  <p>
+    <%= @recipe.allergens.present? ? @recipe.allergens : "No allergens" %>
+  </p>
 
   <h3>Calories</h3>
   <p><%= @recipe.calories %></p>
