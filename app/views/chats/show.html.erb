@@ -16,7 +16,24 @@
       <% elsif message.role == "assistant" %>
         <div class="d-flex justify-content-start mb-5">
           <div class="px-3 pb-0 pt-3">
-            <%= raw(simple_format(message.content)) %>
+            <% recipe = JSON.parse(message.content) %>
+            <p><strong>Name:</strong> <%= recipe["name"] %></p>
+            <p><strong>Calories:</strong> <%= recipe["calories"] %></p>
+            <p><strong>Allergens:</strong> <%= recipe["allergens"].join(", ") %></p>
+            <p><strong>Ingredients:</strong></p>
+            <ul>
+              <% recipe["ingredients"].each do |item| %>
+                <li><%= item["ingredient"] %>: <%= item["quantity"] %></li>
+              <% end %>
+            </ul>
+
+            <p><strong>Method:</strong></p>
+            <ol>
+              <% recipe["method"].each do |step| %>
+                <li><%= step %></li>
+              <% end %>
+            </ol>
+
           </div>
         </div>
       <% end %>
