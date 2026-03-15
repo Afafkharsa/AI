@@ -18,12 +18,13 @@
           <div class="px-3 pb-0 pt-3">
             <% recipe = JSON.parse(message.content) %>
             <p><strong>Name:</strong> <%= recipe["name"] %></p>
+            <p><strong>Keywords: </strong><%= recipe["keywords"].join(", ") %></p>
             <p><strong>Calories:</strong> <%= recipe["calories"] %></p>
             <p><strong>Allergens:</strong> <%= recipe["allergens"].join(", ") %></p>
             <p><strong>Ingredients:</strong></p>
             <ul>
               <% recipe["ingredients"].each do |item| %>
-                <li><%= item["ingredient"] %>: <%= item["quantity"] %></li>
+                <li><%= item["ingredient"] %> - <%= item["quantity"] %></li>
               <% end %>
             </ul>
 
@@ -46,7 +47,7 @@
               <%= hidden_field_tag "recipe[calories]", recipe["calories"] %>
               <%= hidden_field_tag "recipe[allergens]",
               recipe["allergens"].join(", ") %>
-              <%= submit_tag "Save Recipe to Meal Plan", class: "btn btn-success mt-2" %>
+              <%= submit_tag "Save Recipe to Meal Plan", class: "btn btn-primary" %>
 
             <% end %>
 
