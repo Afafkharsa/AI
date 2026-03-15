@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   resources :meal_plans, only: [:index, :create, :show] do
     resources :recipes, only: [:create, :show]
+
+  end
+
+    resources :chats, only: [:index, :create, :show] do
+      resources :messages, only: [:create]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
