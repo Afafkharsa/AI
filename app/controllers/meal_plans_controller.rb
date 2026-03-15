@@ -1,36 +1,32 @@
 class MealPlansController < ApplicationController
+  def index
+    @meal_plans = current_user.meal_plans
+    #@meal_plan = MealPlan.new
+    @today_meals = current_user.meal_plans.where(date: Date.today).order(:meal_type)
+    @weekly_meals = current_user.meal_plans.where(date: Date.today..Date.today + 6.days).order(:meal_type)
+  end
+
+  def show
+    @meal_plan = MealPlan.find(params[:id]) #current_user.meal_plans
+    @recipe = @meal_plan.recipe
+  end
+
+  def new
+    @meal_plan = MealPlan.new
+  end
 
   def create
-    if params[:plans].present?
-    all_plans = params[:plans]
-      all_plans.each do |_index, day_data|
-      target_date = day_data[:date]
-      day_data[:meals].each do |_m_index, meal_data|
-        next if meal_data[:meal].blank?
-        current_user.meal_plans.create!(date:target_date, meal:meal_data[:meal],
-                                        meal_type:meal_data[:meal_type], calories:meal_data[:calories])
-          end
-        end
-      redirect_to meal_plans_path, notice: "Meal plan saved successfully!"
+    @meal_plan = current_user.meal_plans.new(meal_plan_params)
+    if @meal_plan.save
+      redirect_to meal_plan_path(@meal_plan)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def show
-    begin
-    @date = params[:id].to_date
-    rescue
-    @date = Date.today
-    end
-    @meal_plans = current_user.meal_plans.all
-    @weekly_plans = current_user.meal_plans.where(date: @date..(@date + 6.days)).order(:date, :meal, :meal_type)
-  end
-
-
   private
 
-  def meal_plans_params
-    params.require(:meal_plan).permit(:date, :meal, :meal_type, :calories, :user_id)
+  def meal_plan_params
+    params.require(:meal_plan).permit(:date, :meal, :meal_type, :photo, :user_id)
   end
 end

@@ -1,43 +1,25 @@
-<h1>MealPlans#show</h1>
-<p>Find me in app/views/meal_plans/show.html.erb</p>
+<div class="container mt-4">
+  <%= link_to '← Back', meal_plans_path, class: "btn btn-outline-secondary mb-3" %>
 
-<h3>Meal Plan for Today</h3>
-<div class="row">
-  <% @meal_plans.each do |plan| %>
-  <div class="col-md-4">
-    <div class="card-shadow-sm mb-3">
-      <div class="card-body">
-        <h5 class="card-title text-success"><%= plan.meal_type.capitalize %></h5>
-        <p class="card-text"><%= plan.meal %></p>
-        <p class="text-muted"><%= plan.calories %>kcal</p>
-      </div>
+  <div class="card shadow">
+    <div class="card-body">
+      <h1 class="text-success"><%= @meal_plan.meal %></h1>
+      <p class="badge bg-info text-dark"><%= @meal_plan.meal_type.capitalize %></p>
+      <p><strong>Date:</strong> <%= @meal_plan.date.strftime("%d %B %Y") %></p>
+
+      <hr>
+
+      <% if @recipe %>
+        <h3>🍳 How to cook</h3>
+        <p><strong>Calories:</strong> <%= @recipe.calories %> kcal</p>
+        <p><strong>Ingredients:</strong> <%= @recipe.ingredients %></p>
+        <p><strong>Instruction:</strong></p>
+        <div class="p-3 bg-light border rounded">
+          <%= @recipe.method %>
+        </div>
+      <% else %>
+        <p class="text-muted">There are no recipes available for this menu yet</p>
+      <% end %>
     </div>
   </div>
-  <% end %>
-</div>
-
-<h3>Weekly Meal Plan</h3>
-<div class="class=table">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Breakfast</th>
-        <th>Lunch</th>
-        <th>Dinner</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% (@date..@date + 6.days).each do |day| %>
-      <tr>
-        <td><%= day.strftime("%a, %b, %d") %></td>
-        <% ["breakfast", "lunch", "dinner"].each do |type| %>
-        <td>
-          <% meal = @weekly_meal.find { |m| m.date == day && m.meal_type == type } %>
-
-        </td>
-      </tr>
-    </tbody>
-
-  </table>
 </div>
