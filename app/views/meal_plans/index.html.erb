@@ -1,58 +1,77 @@
 <div class="container">
   <h1>My meal plans</h1>
 
-  <div>
-    <p>Ask the assistant for a meal plan</p>
-  </div>
+  <div class="container">
+    <div class="row g-4 text-center">
 
+      <div class="col-md-9">
 
-  <div>
-    <p>Ask the assistant for a new recipe</p>
-  </div>
+        <div class="container mt-2">
 
-  <div class="container mt-4">
-    <h3>Today's meal plans</h3>
-    <div class="d-flex justify-content-start">
-      <% @today_meals.each do |meal| %>
-        <div class="card col-3 text-bg-light m-2">
-          <div class="card-header">
-            <%= meal.date %> - <%= meal.meal_type %>
+          <%# Meal plans %>
+          <h3>Today's meal plans</h3>
+          <div class="d-flex justify-content-start">
+            <% @today_meals.each do |meal| %>
+              <div class="card col-3 text-bg-light m-2">
+                <div class="card-header">
+                  <%= meal.date %> - <%= meal.meal_type %>
+                </div>
+                <ul class="card-body bg-white">
+                  <% meal.recipes.each do |recipe| %>
+                  <li class="list-group-item">
+                    <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe),
+                    class: "text-decoration-none text-dark" %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
+              <% end %>
           </div>
-          <ul class="card-body">
-            <% meal.recipes.each do |recipe| %>
-            <li class="list-group-item">
-              <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
-            </li>
-            <% end %>
-          </ul>
         </div>
+
+        <div class="container mt-2">
+          <h3>This week meal plans</h3>
+          <div class="d-flex justify-content-start">
+            <% @weekly_meals.each do |meal| %>
+              <div class="card col-3 text-bg-light m-2">
+                <div class="card-header">
+                  <%= meal.date %> - <%= meal.meal_type %>
+                </div>
+                <ul class="card-body bg-white">
+                  <% meal.recipes.each do |recipe| %>
+                  <li class="list-group-item">
+                    <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe),
+                    class: "text-decoration-none text-dark" %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
+              <% end %>
+          </div>
+        </div>
+      </div>
+
+    <%# Chatbot and meal plan create %>
+    <div class="col-md-3">
+      <h3 class="mt-2">Tools</h3>
+
+      <div class="form-actions mt-2 text-center">
+        <%= link_to chats_path, data: { turbo_method: :post },
+        class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
+          <div class="fs-3">🤖</div>
+          <h5 class="fw-bold mt-3">Ask for a recipe</h5>
         <% end %>
+      </div>
+
+      <div class="form-actions mt-2 text-center">
+        <%= link_to new_meal_plan_path, data: { turbo_method: :post },
+        class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
+          <div class="fs-3">🗓️</div>
+          <h5 class="fw-bold mt-3">Create a New Plan</h5>
+        <% end %>
+      </div>
+
     </div>
   </div>
-
-  <div class="container mt-4">
-    <h3>This week meal plans</h3>
-    <div class="d-flex justify-content-start">
-      <% @weekly_meals.each do |meal| %>
-        <div class="card col-3 text-bg-light m-2">
-          <div class="card-header">
-            <%= meal.date %> - <%= meal.meal_type %>
-          </div>
-          <ul class="card-body">
-            <% meal.recipes.each do |recipe| %>
-            <li class="list-group-item">
-              <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-        <% end %>
-    </div>
-  </div>
-
-  <div class="form-actions mt-4 text-center">
-    <%= link_to "Create a New Plan", new_meal_plan_path, class: "btn btn-success w-100" %>
-  </div>
-
 
 </div>
