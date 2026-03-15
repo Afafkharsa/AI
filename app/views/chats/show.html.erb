@@ -16,7 +16,12 @@
       <% elsif message.role == "assistant" %>
         <div class="d-flex justify-content-start mb-5">
           <div class="px-3 pb-0 pt-3">
-            <%= raw(simple_format(message.content)) %>
+            <%# <%= raw(simple_format(message.content)) %>
+            <ul>
+              <% JSON.parse(message.content).each do |key, value| %>
+                <li><strong><%= key %>:</strong> <%= value %></li>
+              <% end %>
+            </ul>
           </div>
         </div>
       <% end %>
