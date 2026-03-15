@@ -7,8 +7,8 @@ class MealPlansController < ApplicationController
   end
 
   def show
-    @meal_plan = MealPlan.find(params[:id]) #current_user.meal_plans
-    @recipe = @meal_plan.recipe
+    @meal_plan = MealPlan.find(params[:id])
+    @recipe = @meal_plan.recipes
   end
 
   def new
@@ -22,6 +22,25 @@ class MealPlansController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @meal_plan = MealPlan.find(params[:id])
+  end
+
+  def update
+    @meal_plan = MealPlan.find(params[:id])
+    if @meal_plan.update(meal_plan_params)
+      redirect_to meal_plan_path(@meal_plan)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @meal_plan = MealPlan.find(params[:id])
+    @meal_plan.destroy
+    redirect_to meal_plan_path
   end
 
   private

@@ -18,7 +18,8 @@
           <div class="card-header">
             <%= meal.date %> - <%= meal.meal_type %>
           </div>
-          <ul class="card-body">
+          <ul class="card-body mb-1">
+            <h5 class="card-title, font-weight: 600,  text-success"><%= meal.meal.capitalize %></h5>
             <% meal.recipes.each do |recipe| %>
             <li class="list-group-item">
               <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
@@ -38,7 +39,8 @@
           <div class="card-header">
             <%= meal.date %> - <%= meal.meal_type %>
           </div>
-          <ul class="card-body">
+          <ul class="card-body mb-1">
+          <h5 class="card-title, font-weight: 600,  text-success"><%= meal.meal.capitalize %></h5>
             <% meal.recipes.each do |recipe| %>
             <li class="list-group-item">
               <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
@@ -51,7 +53,9 @@
   </div>
 
   <div class="form-actions mt-4 text-center">
-    <%= link_to "Create a New Plan", new_meal_plan_path, class: "btn btn-success w-100" %>
+    <div class="d-flex justify-content-start">
+      <%= link_to "Create a New Plan", new_meal_plan_path, class: "btn btn-success w-100" %>
+    </div>
   </div>
 
 
