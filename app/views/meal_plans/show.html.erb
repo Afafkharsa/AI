@@ -1,2 +1,25 @@
-<h1>MealPlans#show</h1>
-<p>Find me in app/views/meal_plans/show.html.erb</p>
+<div class="container mt-4">
+  <%= link_to '← Back', meal_plans_path, class: "btn btn-outline-secondary mb-3" %>
+
+  <div class="card shadow">
+    <div class="card-body">
+      <h1 class="text-success"><%= @meal_plan.meal %></h1>
+      <p class="badge bg-info text-dark"><%= @meal_plan.meal_type.capitalize %></p>
+      <p><strong>Date:</strong> <%= @meal_plan.date.strftime("%d %B %Y") %></p>
+
+      <hr>
+
+      <% if @recipe %>
+        <h3>🍳 How to cook</h3>
+        <p><strong>Calories:</strong> <%= @recipe.calories %> kcal</p>
+        <p><strong>Ingredients:</strong> <%= @recipe.ingredients %></p>
+        <p><strong>Instruction:</strong></p>
+        <div class="p-3 bg-light border rounded">
+          <%= @recipe.method %>
+        </div>
+      <% else %>
+        <p class="text-muted">There are no recipes available for this menu yet</p>
+      <% end %>
+    </div>
+  </div>
+</div>

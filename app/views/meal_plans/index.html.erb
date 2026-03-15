@@ -7,7 +7,7 @@
 
     <h3>Today's meal plans</h3>
     <% @today_meals.each do |meal| %>
-      <h4><%= meal.date %></h4>
+      <h4><%= meal.meal %>(<%= meal.date %>)</h4>
       <ul>
         <li>
           Recipes
@@ -21,7 +21,7 @@
   <h3>This week meal plans</h3>
 
   <% @weekly_meals.each do |meal| %>
-    <h4><%= meal.date %></h4>
+    <h4><%= meal.meal %>(<%= meal.date %>)</h4>
     <ul>
       <li>
         Recipes
@@ -30,4 +30,6 @@
   <% end %>
   </div>
 
-</div>
+  <div class="form-actions mt-4 text-center">
+    <%= link_to "Create a New Plan", new_meal_plan_path, class: "btn btn-success w-100" %>
+  </div>
