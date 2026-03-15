@@ -1,35 +1,58 @@
 <div class="container">
   <h1>My meal plans</h1>
+
   <div>
-    <h3>Ask the assistant for a meal plan</h3>
+    <p>Ask the assistant for a meal plan</p>
   </div>
-  <div class="container">
 
+
+  <div>
+    <p>Ask the assistant for a new recipe</p>
+  </div>
+
+  <div class="container mt-4">
     <h3>Today's meal plans</h3>
-    <% @today_meals.each do |meal| %>
-      <h4><%= meal.meal %>(<%= meal.date %>)</h4>
-      <ul>
-        <li>
-          Recipes
-        </li>
-      </ul>
-    <% end %>
+    <div class="d-flex justify-content-start">
+      <% @today_meals.each do |meal| %>
+        <div class="card col-3 text-bg-light m-2">
+          <div class="card-header">
+            <%= meal.date %> - <%= meal.meal_type %>
+          </div>
+          <ul class="card-body">
+            <% meal.recipes.each do |recipe| %>
+            <li class="list-group-item">
+              <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+    </div>
   </div>
 
-
-  <div class="container">
-  <h3>This week meal plans</h3>
-
-  <% @weekly_meals.each do |meal| %>
-    <h4><%= meal.meal %>(<%= meal.date %>)</h4>
-    <ul>
-      <li>
-        Recipes
-      </li>
-    </ul>
-  <% end %>
+  <div class="container mt-4">
+    <h3>This week meal plans</h3>
+    <div class="d-flex justify-content-start">
+      <% @weekly_meals.each do |meal| %>
+        <div class="card col-3 text-bg-light m-2">
+          <div class="card-header">
+            <%= meal.date %> - <%= meal.meal_type %>
+          </div>
+          <ul class="card-body">
+            <% meal.recipes.each do |recipe| %>
+            <li class="list-group-item">
+              <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+    </div>
   </div>
 
   <div class="form-actions mt-4 text-center">
     <%= link_to "Create a New Plan", new_meal_plan_path, class: "btn btn-success w-100" %>
   </div>
+
+
+</div>
