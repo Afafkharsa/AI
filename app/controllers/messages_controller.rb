@@ -13,7 +13,14 @@ class MessagesController < ApplicationController
     - Total calories
     - Allergens
 
-    Answer concisely in Markdown.
+    Answer in json with following keys :
+     - name,
+     - ingredients,
+     - method,
+     - keywords,
+     - calories,
+     - allergens.
+    For exemple high protein is a keyword
   "
 
   def create
