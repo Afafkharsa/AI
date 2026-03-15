@@ -1,14 +1,13 @@
 class MealPlansController < ApplicationController
   def index
-    @meal_plans = current_user.meal_plans
-    #@meal_plan = MealPlan.new
+    # @meal_plans = current_user.meal_plans
     @today_meals = current_user.meal_plans.where(date: Date.today).order(:meal_type)
-    @weekly_meals = current_user.meal_plans.where(date: Date.today..Date.today + 6.days).order(:meal_type)
+    @weekly_meals = current_user.meal_plans.where(date: Date.today + 1..Date.today + 6.days).order(date: :asc)
   end
 
   def show
-    @meal_plan = MealPlan.find(params[:id]) #current_user.meal_plans
-    @recipe = @meal_plan.recipe
+    @meal_plan = MealPlan.find(params[:id])
+    @recipes = @meal_plan.recipes
   end
 
   def new
@@ -18,10 +17,29 @@ class MealPlansController < ApplicationController
   def create
     @meal_plan = current_user.meal_plans.new(meal_plan_params)
     if @meal_plan.save
-      redirect_to meal_plan_path(@meal_plan)
+      redirect_to meal_plans_path
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @meal_plan = MealPlan.find(params[:id])
+  end
+
+  def update
+    @meal_plan = MealPlan.find(params[:id])
+    if @meal_plan.update(meal_plan_params)
+      redirect_to meal_plans_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @meal_plan = MealPlan.find(params[:id])
+    @meal_plan.destroy
+    redirect_to meal_plans_path
   end
 
   private

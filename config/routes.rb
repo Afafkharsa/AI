@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :meal_plans, only: [:index, :new, :create, :show] do
-    resources :recipes, only: [:show]
+  resources :meal_plans, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+    resources :recipes, only: [:create, :show, :destroy]
 
   end
 

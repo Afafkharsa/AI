@@ -1,0 +1,9 @@
+<div class="container mt-4 ">
+  <%= link_to '← Back', meal_plan_path, class: "btn btn-outline-secondary rounded-4 mb-3" %>
+   <div class="card shadow">
+    <div class="card-body">
+      <h1 class="mt-4 mb-2 text-center">Edit Meal plan</h1>
+      <%= render "form", meal_plan: @meal_plan %>
+    </div>
+  </div>
+</div>
