@@ -36,7 +36,7 @@
             </ol>
 
             <%= form_with url: recipes_path, method: :post do |f| %>
-              <%= f.select :meal_plan_id, @meal_plans.order(:date).map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
+              <%= f.select "recipe[meal_plan_id]", @meal_plans.order(:date).map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
               class: "btn btn-info" %>
               <%= hidden_field_tag "recipe[name]", recipe["name"] %>
               <%= hidden_field_tag "recipe[ingredients]", recipe["ingredients"].map { |i| "#{i['ingredient']} - #{i['quantity']}" }.join(", ") %>

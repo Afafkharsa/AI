@@ -1,7 +1,6 @@
 class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
-    raise
     if @recipe.save
       redirect_to meal_plan_recipe_path(@recipe.meal_plan, @recipe)
     else
