@@ -1,0 +1,13 @@
+<div class="container py-4">
+  <h1>My Chats</h1>
+
+  <% if @chats.any? %>
+    <ul>
+      <% @chats.each do |chat| %>
+        <li><%= link_to chat.title, chat_path(chat) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No chats yet.</p>
+  <% end %>
+</div>
