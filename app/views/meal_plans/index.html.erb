@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
   <h1>My meal plans</h1>
 
   <div>
@@ -10,7 +10,7 @@
     <p>Ask the assistant for a new recipe</p>
   </div>
 
-  <div class="container mt-4">
+  <div class="container-daily mt-4">
     <h3>Today's meal plans</h3>
     <div class="d-flex justify-content-start">
       <% @today_meals.each do |meal| %>
@@ -19,7 +19,8 @@
             <%= meal.date %> - <%= meal.meal_type %>
           </div>
           <ul class="card-body mb-1">
-            <h5 class="card-title, font-weight: 600,  text-success"><%= meal.meal.capitalize %></h5>
+          <h5><%= link_to meal.meal.capitalize, meal_plan_path(meal),
+    class: "meal-link, font-weight: 600, text-success", style: "text-decoration: none; cursor: pointer; color: inherit;" %> </h5>
             <% meal.recipes.each do |recipe| %>
             <li class="list-group-item">
               <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
@@ -31,30 +32,47 @@
     </div>
   </div>
 
-  <div class="container mt-4">
-    <h3>This week meal plans</h3>
-    <div class="d-flex justify-content-start">
-      <% @weekly_meals.each do |meal| %>
-        <div class="card col-3 text-bg-light m-2">
-          <div class="card-header">
-            <%= meal.date %> - <%= meal.meal_type %>
+<div class="container-weekly mt-4">
+  <h3 class="mb-4">This week meal plans</h3>
+
+  <%# ใช้ d-flex และ flex-row เพื่อให้การ์ดเรียงไปทางขวา %>
+  <div class="d-flex flex-row flex-nowrap overflow-auto pb-3">
+    <% @weekly_meals.group_by(&:date).each do |date, day_meals| %>
+
+      <%# กำหนดความกว้างการ์ดและระยะห่าง %>
+      <div class="me-3" style="min-width: 280px;">
+        <div class="card shadow-sm h-100" style="border-radius: 15px; border: 1px solid #eee;">
+
+          <div class="card-header bg-body-secondary text-black text-center py-2" style="border-radius: 15px 15px 0 0;">
+            <strong style="font-size: 1.1rem;"><%= date.strftime("%A, %d %B") %></strong>
           </div>
-          <ul class="card-body mb-1">
-          <h5 class="card-title, font-weight: 600,  text-success"><%= meal.meal.capitalize %></h5>
-            <% meal.recipes.each do |recipe| %>
-            <li class="list-group-item">
-              <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
-            </li>
+
+          <div class="card-body bg-body-tertiary">
+            <%# เรียงมื้ออาหารข้างใน: Breakfast -> Lunch -> Dinner %>
+            <% day_meals.sort_by { |m| ["Breakfast", "Lunch", "Dinner"].index(m.meal_type) || 99 }.each do |m| %>
+              <div class="meal-item mb-2 border-bottom pb-2">
+                <span class="badge bg-body-secondary mb-1 text-secondary" style="font-size: 0.7rem;"><%= m.meal_type %></span>
+                <h5 class="m-0">
+                  <% if m.meal %>
+                    <%= link_to m.meal.capitalize, meal_plan_path(m),
+                      class: "text-success", style: "text-decoration: none; font-weight: 600;" %>
+                  <% else %>
+                  <div style="height: 24px;"></div>
+                  <% end %>
+                </h5>
+              </div>
             <% end %>
-          </ul>
+          </div>
+
         </div>
-        <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
+</div>
 
   <div class="form-actions mt-4 text-center">
-    <div class="d-flex justify-content-start">
-      <%= link_to "Create a New Plan", new_meal_plan_path, class: "btn btn-success w-100" %>
+    <div class="d-flex justify-content-start px-4 py-2">
+      <%= link_to "Create a New Plan", new_meal_plan_path, class: "btn btn-success btn-sm rounded-4 fs-4" %>
     </div>
   </div>
 
