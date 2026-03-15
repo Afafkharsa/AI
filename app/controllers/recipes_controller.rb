@@ -1,10 +1,7 @@
 class RecipesController < ApplicationController
   def create
-    meal_plan = current_user.meal_plans.first
-
     @recipe = Recipe.new(recipe_params)
-    @recipe.meal_plan = meal_plan
-
+    raise
     if @recipe.save
       redirect_to meal_plan_recipe_path(@recipe.meal_plan, @recipe)
     else
