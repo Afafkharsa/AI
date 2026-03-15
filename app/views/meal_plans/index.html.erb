@@ -8,7 +8,6 @@
 
         <div class="container mt-2">
 
-<<<<<<< HEAD
   <div class="container-daily mt-4">
     <h3>Today's meal plans</h3>
     <div class="d-flex justify-content-start">
@@ -26,27 +25,6 @@
             </li>
             <% end %>
           </ul>
-=======
-          <%# Meal plans %>
-          <h3>Today's meal plans</h3>
-          <div class="d-flex justify-content-start">
-            <% @today_meals.each do |meal| %>
-              <div class="card col-3 text-bg-light m-2">
-                <div class="card-header">
-                  <%= meal.date %> - <%= meal.meal_type %>
-                </div>
-                <ul class="card-body bg-white">
-                  <% meal.recipes.each do |recipe| %>
-                  <li class="list-group-item">
-                    <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe),
-                    class: "text-decoration-none text-dark" %>
-                  </li>
-                  <% end %>
-                </ul>
-              </div>
-              <% end %>
-          </div>
->>>>>>> 2378e51fabdfc7b2ad4ea099fa9b043c62c2492a
         </div>
 
         <div class="container mt-2">
@@ -94,7 +72,6 @@
     </div>
   </div>
 
-<<<<<<< HEAD
 <div class="container-weekly mt-4">
   <h3 class="mb-4">This week meal plans</h3>
 
@@ -140,6 +117,4 @@
   </div>
 
 
-=======
->>>>>>> 2378e51fabdfc7b2ad4ea099fa9b043c62c2492a
 </div>
