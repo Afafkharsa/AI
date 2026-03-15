@@ -21,6 +21,7 @@ class MessagesController < ApplicationController
      - calories,
      - allergens.
     For exemple high protein is a keyword
+    Do not use Markdown
   "
 
   def create
