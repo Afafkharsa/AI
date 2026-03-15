@@ -70,3 +70,57 @@ Recipe.create!(
 )
 
 puts "Finished! Created #{User.count} users, #{MealPlan.count} meal plans and #{Recipe.count} recipes"
+
+puts "Creating chat..."
+
+chat_1 = Chat.create!(
+  user_id: user,
+  title: "High protein recipe",
+)
+
+puts "Creating chat message"
+
+Message.create!(
+  chat_id: chat_1,
+  role: "user",
+  content: "You are a recipe assistant, helping users find and create recipes.
+  I am a user looking to discover new recipes, get cooking instructions and track
+  my calories. Help me find, suggest and create recipes. Always structure your
+  recipe with: - Name - Ingredients with quantities - Step by step method -
+  Total calories - Allergens suggest me a high protecin recipe Answer in json."
+)
+
+Message.create!(
+  chat_id: chat_1,
+  role: "assistant",
+  content: '
+    {
+      "name": "High-Protein Turkey & Egg White Scramble",
+      "ingredients": [
+        {"ingredient": "lean ground turkey", "quantity": "150 g"},
+        {"ingredient": "egg whites", "quantity": "120 g (about 4 egg whites)"},
+        {"ingredient": "olive oil", "quantity": "1 teaspoon"},
+        {"ingredient": "spinach", "quantity": "1 cup (30 g)"},
+        {"ingredient": "red bell pepper, diced", "quantity": "1/2 cup (75 g)"},
+        {"ingredient": "garlic, minced", "quantity": "1 clove"},
+        {"ingredient": "salt", "quantity": "1/4 teaspoon"},
+        {"ingredient": "black pepper", "quantity": "1/4 teaspoon"}
+      ],
+      "method": [
+        "Heat olive oil in a non-stick pan over medium heat.",
+        "Add minced garlic and cook for about 30 seconds until fragrant.",
+        "Add ground turkey and cook for 5–6 minutes, breaking it apart until fully browned.",
+        "Add diced bell pepper and cook for 2 minutes.",
+        "Stir in spinach and cook until wilted.",
+        "Pour in egg whites and gently scramble everything together.",
+        "Cook for 2–3 minutes until egg whites are fully set. Season with salt and black pepper.",
+        "Serve warm."
+      ],
+      "total_calories": 330,
+      "allergens": ["Eggs"]
+    }
+  '
+)
+
+
+puts "Finished! Created #{Chat.count} chats and #{Message.count} messages"
