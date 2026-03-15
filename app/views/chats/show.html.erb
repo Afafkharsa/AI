@@ -38,15 +38,11 @@
             <%= form_with url: meal_plan_recipes_path(current_user.meal_plans.first), method: :post do %>
 
               <%= hidden_field_tag "recipe[name]", recipe["name"] %>
-              <%= hidden_field_tag "recipe[ingredients]",
-              recipe["ingredients"].map { |i| "#{i['ingredient']} - #{i['quantity']}" }.join(", ") %>
-              <%= hidden_field_tag "recipe[method]",
-              recipe["method"].join("\n") %>
-              <%= hidden_field_tag "recipe[keywords]",
-              recipe["keywords"].join(", ") %>
+              <%= hidden_field_tag "recipe[ingredients]", recipe["ingredients"].map { |i| "#{i['ingredient']} - #{i['quantity']}" }.join(", ") %>
+              <%= hidden_field_tag "recipe[method]", recipe["method"].join("\n") %>
+              <%= hidden_field_tag "recipe[keywords]", recipe["keywords"].join(", ") %>
               <%= hidden_field_tag "recipe[calories]", recipe["calories"] %>
-              <%= hidden_field_tag "recipe[allergens]",
-              recipe["allergens"].join(", ") %>
+              <%= hidden_field_tag "recipe[allergens]", recipe["allergens"].join(", ") %>
               <%= submit_tag "Save Recipe to Meal Plan", class: "btn btn-primary" %>
 
             <% end %>
