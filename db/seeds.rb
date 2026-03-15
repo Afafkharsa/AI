@@ -39,6 +39,7 @@ meal_plan_3 = MealPlan.create!(
 )
 
 puts "Creating recipes..."
+
 Recipe.create!(
   name: "Chickpea Salad",
   ingredients: "1 cup chickpeas, cucumber, olive oil, lemon",
@@ -74,14 +75,14 @@ puts "Finished! Created #{User.count} users, #{MealPlan.count} meal plans and #{
 puts "Creating chat..."
 
 chat_1 = Chat.create!(
-  user_id: user,
+  user: user,
   title: "High protein recipe",
 )
 
 puts "Creating chat message"
 
 Message.create!(
-  chat_id: chat_1,
+  chat: chat_1,
   role: "user",
   content: "You are a recipe assistant, helping users find and create recipes.
   I am a user looking to discover new recipes, get cooking instructions and
@@ -93,7 +94,7 @@ Message.create!(
 )
 
 Message.create!(
-  chat_id: chat_1,
+  chat: chat_1,
   role: "assistant",
   content: '
     {
@@ -125,4 +126,4 @@ Message.create!(
 )
 
 
-puts "Finished! Created #{Chat.count} chats and #{Message.count} messages"
+puts "Finished! Created #{Chat.count} chat(s) and #{Message.count} messages"
