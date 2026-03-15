@@ -4,16 +4,21 @@
   <h3>Keywords</h3>
   <p><%= @recipe.keywords %></p>
 
-  <h3>Allergens</h3>
-  <p><%= @recipe.allergens %></p>
-
   <h3>Calories</h3>
   <p><%= @recipe.calories %></p>
 
+  <h3>Allergens</h3>
+  <p>
+    <%= @recipe.allergens.present? ? @recipe.allergens : "No allergens" %>
+  </p>
+
   <h3>Ingredients</h3>
-  <p><%= @recipe.ingredients %></p>
+  <ul>
+    <% @recipe.ingredients.split(",").each do |ingredient| %>
+      <li><%= ingredient.strip %></li>
+    <% end %>
+  </ul>
 
   <h3>Method</h3>
   <p><%= @recipe.method %></p>
 </div>
-app/models
