@@ -84,10 +84,12 @@ Message.create!(
   chat_id: chat_1,
   role: "user",
   content: "You are a recipe assistant, helping users find and create recipes.
-  I am a user looking to discover new recipes, get cooking instructions and track
-  my calories. Help me find, suggest and create recipes. Always structure your
-  recipe with: - Name - Ingredients with quantities - Step by step method -
-  Total calories - Allergens suggest me a high protecin recipe Answer in json."
+  I am a user looking to discover new recipes, get cooking instructions and
+  track my calories. Help me find, suggest and create recipes. Always structure
+  your recipe with: - Name - Ingredients with quantities - Step by step method -
+  Total calories - Allergens. Suggest me a high protecin recipe.
+  Answer in json with following keys : name, ingredients, method, keywords,
+  calories, allergens. For exemple high protein is a keyword"
 )
 
 Message.create!(
@@ -95,29 +97,29 @@ Message.create!(
   role: "assistant",
   content: '
     {
-      "name": "High-Protein Turkey & Egg White Scramble",
+      "name": "High-Protein Greek Yogurt Chicken Salad",
       "ingredients": [
-        {"ingredient": "lean ground turkey", "quantity": "150 g"},
-        {"ingredient": "egg whites", "quantity": "120 g (about 4 egg whites)"},
-        {"ingredient": "olive oil", "quantity": "1 teaspoon"},
-        {"ingredient": "spinach", "quantity": "1 cup (30 g)"},
-        {"ingredient": "red bell pepper, diced", "quantity": "1/2 cup (75 g)"},
-        {"ingredient": "garlic, minced", "quantity": "1 clove"},
+        {"ingredient": "cooked chicken breast, shredded", "quantity": "150 g"},
+        {"ingredient": "plain nonfat Greek yogurt", "quantity": "120 g"},
+        {"ingredient": "celery, finely chopped", "quantity": "50 g"},
+        {"ingredient": "red onion, finely chopped", "quantity": "20 g"},
+        {"ingredient": "lemon juice", "quantity": "1 tablespoon"},
+        {"ingredient": "Dijon mustard", "quantity": "1 teaspoon"},
         {"ingredient": "salt", "quantity": "1/4 teaspoon"},
-        {"ingredient": "black pepper", "quantity": "1/4 teaspoon"}
+        {"ingredient": "black pepper", "quantity": "1/4 teaspoon"},
+        {"ingredient": "fresh parsley, chopped", "quantity": "1 tablespoon"}
       ],
       "method": [
-        "Heat olive oil in a non-stick pan over medium heat.",
-        "Add minced garlic and cook for about 30 seconds until fragrant.",
-        "Add ground turkey and cook for 5–6 minutes, breaking it apart until fully browned.",
-        "Add diced bell pepper and cook for 2 minutes.",
-        "Stir in spinach and cook until wilted.",
-        "Pour in egg whites and gently scramble everything together.",
-        "Cook for 2–3 minutes until egg whites are fully set. Season with salt and black pepper.",
-        "Serve warm."
+        "Place the shredded cooked chicken breast in a large bowl.",
+        "Add the Greek yogurt, lemon juice, and Dijon mustard.",
+        "Mix in the chopped celery, red onion, and parsley.",
+        "Season with salt and black pepper.",
+        "Stir everything together until well combined and creamy.",
+        "Serve immediately or refrigerate for 30 minutes to enhance the flavor."
       ],
-      "total_calories": 330,
-      "allergens": ["Eggs"]
+      "keywords": ["high protein", "healthy", "low carb", "quick meal"],
+      "calories": 310,
+      "allergens": ["dairy", "mustard"]
     }
   '
 )
