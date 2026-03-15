@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     - Total calories
     - Allergens
 
-    Always respond **strictly in JSON** without any extra text or markdown.
+    Always respond strictly in JSON without any extra text or markdown.
     The JSON must include these keys:
 
     {
