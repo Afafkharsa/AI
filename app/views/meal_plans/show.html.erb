@@ -1,31 +1,57 @@
 <div class="container mt-4">
-  <%= link_to '← Back', meal_plans_path, class: "btn btn-outline-secondary rounded-4 mb-3" %>
-  <div class="card shadow">
-    <div class="card-body">
-      <h1 class="text-success"><%= @meal_plan.meal %></h1>
-      <p><strong>Date:</strong> <%= @meal_plan.date.strftime("%d %B %Y") %></p>
-      <hr>
+  <%= link_to '← Back', meal_plans_path, class: "btn btn-outline-secondary bg-white rounded-4 mb-3" %>
+  <div class="container">
+    <div class="row g-4 text-center">
 
-      <% if @meal_plan.recipes.any? %>
-        <% @meal_plan.recipes.each do |recipe| %>
-          <div class="mb-4">
-            <h3>How to cook: <%= recipe.name %></h3>
-            <p><strong>Calories:</strong> <%= recipe.calories %> kcal</p>
-            <p><strong>Ingredients:</strong> <%= recipe.ingredients %></p>
-            <p><strong>Method:</strong></p>
-            <div class="p-3 bg-light border rounded">
-              <%= recipe.method %>
-            </div>
-          </div>
-        <% end %>
-      <% else %>
-        <p class="text-muted">There are no recipes available for this menu yet.</p>
-      <% end %>
+      <div class="col-md-9 card border-0 shadow-sm bg-white">
+        <div class="card-body">
+          <h1 class="text-success"><%= @meal_plan.meal %></h1>
+          <p><strong>Date:</strong> <%= @meal_plan.date.strftime("%d %B %Y") %></p>
+          <hr>
+
+          <% if @meal_plan.recipes.any? %>
+            <% @meal_plan.recipes.each do |recipe| %>
+              <div class="mb-4">
+                <h3>How to cook: <%= recipe.name %></h3>
+                <p><strong>Calories:</strong> <%= recipe.calories %> kcal</p>
+                <p><strong>Ingredients:</strong> <%= recipe.ingredients %></p>
+                <p><strong>Method:</strong></p>
+                <div class="p-3 bg-light border rounded">
+                  <%= recipe.method %>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-muted">There are no recipes available for this menu yet.</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-3">
+
+        <div class="form-actions text-center">
+          <%= link_to chats_path, data: { turbo_method: :post },
+          class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
+            <div class="fs-3">🤖</div>
+            <h5 class="fw-bold mt-3">Ask for a recipe</h5>
+          <% end %>
+        </div>
+
+        <div class="form-actions mt-2 text-center">
+          <%= link_to edit_meal_plan_path(@meal_plan),
+          class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
+            <div class="fs-3">📝</div>
+            <h5 class="fw-bold mt-3">Edit Plan</h5>
+          <% end %>
+        </div>
+
+        <div class="form-actions mt-2 text-center">
+          <%= link_to meal_plan_path(@meal_plan), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+          class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
+            <div class="fs-3">🗑️</div>
+            <h5 class="fw-bold mt-3">Delete plan</h5>
+          <% end %>
+        </div>
+
     </div>
-  </div>
-  <div class="d-flex justify-content-center gap-3 ">
-    <%= link_to "Edit a Plan", edit_meal_plan_path(@meal_plan), class: "btn btn-success w-50 rounded-4 mt-3 me-2 fs-4" %>
-     <%= link_to "Delete a Plan", meal_plan_path(@meal_plan), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger w-50 rounded-4 mt-3 ms-2 fs-4" %>
-  </div>
-
+  </div >
 </div>

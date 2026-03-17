@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   resources :meal_plans, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     resources :recipes, only: [:create, :show, :destroy]
-
   end
 
   resources :chats, only: [:index, :create, :show] do
