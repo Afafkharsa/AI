@@ -29,17 +29,13 @@
       <div class="col-md-3">
 
         <div class="form-actions text-center">
-          <%= link_to chats_path, data: { turbo_method: :post },
-          class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
-            <div class="fs-3">🤖</div>
-            <h5 class="fw-bold mt-3">Ask for a recipe</h5>
-          <% end %>
-        </div>
-        <div class="form-actions text-center">
           <%= form_with url: chats_path, method: :post do |f| %>
             <%= hidden_field_tag "chat[title]", @meal_plan.meal %>
-            <%= submit_tag "Save Recipe to Meal Plan", class: "btn btn-primary" %>
-
+            <%= button_tag(type: 'submit',
+            class: "card h-100 w-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white") do %>
+              <div class="fs-3">🤖</div>
+              <h5 class="">Ask for a recipe</h5>
+            <% end %>
           <% end %>
         </div>
 
