@@ -35,11 +35,23 @@
               <% end %>
             </ol>
 
+            <%# Need to be replaced by simple_form  %>
+            <%# = simple_form_for @movie do |f|
+              f.hidden :title, "some value"
+              f.input_field :category, collection: Item::CATEGORY, prompt: "Select Category"
+              f.button :submit %>
+
             <%= form_with url: recipes_path, method: :post do |f| %>
-              <%= f.select "recipe[meal_plan_id]",
-              @meal_plans.map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
-              selected: ["#{@meal_plan.date} #{@meal_plan.meal_type}", @meal_plan.id],
-              class: "btn btn-info" %>
+              <% if @meal_plan %>
+                <%= f.select "recipe[meal_plan_id]",
+                @meal_plans.map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
+                selected: ["#{@meal_plan.date} #{@meal_plan.meal_type}", @meal_plan.id],
+                class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" %>
+              <% else %>
+                <%= f.select "recipe[meal_plan_id]",
+                @meal_plans.map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
+                class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" %>
+              <% end %>
               <%= hidden_field_tag "recipe[name]", recipe["name"] %>
               <%= hidden_field_tag "recipe[ingredients]", recipe["ingredients"].map { |i| "#{i['ingredient']} - #{i['quantity']}" }.join(", ") %>
               <%= hidden_field_tag "recipe[method]", recipe["method"].join("\n") %>
