@@ -1,5 +1,5 @@
 <!-- Hero Section -->
-<div class="container text-center py-5">
+<div class="container text-center py-3">
   <div class="row justify-content-center">
     <div class="col-md-8">
 
@@ -14,7 +14,7 @@
         <% if user_signed_in? %>
           <%= link_to "See how it works", "#features", class: "btn btn-outline-secondary btn-lg" %>
         <% else %>
-          <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+          <%= link_to "Get Started", new_user_registration_path, class: "btn btn-light btn-lg" %>
           <%= link_to "See how it works", "#features", class: "btn btn-outline-secondary btn-lg" %>
         <% end %>
       </div>
