@@ -6,7 +6,10 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Chat.new(title: "Untitled")
+    @chat = Chat.new(chat_params)
+    unless @chat.title
+      @chat.title = "Untitled"
+    end
     @chat.user = current_user
 
     if @chat.save
@@ -21,4 +24,9 @@ class ChatsController < ApplicationController
     @meal_plans = current_user.meal_plans
     @message = Message.new
   end
+
+  def chat_params
+    params.require(:chat).permit(:title)
+  end
+
 end
