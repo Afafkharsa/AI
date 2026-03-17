@@ -2,7 +2,7 @@ class ChatsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @chats = current_user.chats
+    @chats = current_user.chats.where.not(title: "Untitled")
   end
 
   def create
