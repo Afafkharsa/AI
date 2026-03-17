@@ -1,8 +1,8 @@
 <div class="container py-4">
 
-<% unless @chat.title == "Untitled" %>
-  <h1><%= @chat.title %></h1>
-<% end %>
+  <% unless @chat.title == "Untitled" %>
+    <h1><%= @chat.title %></h1>
+  <% end %>
 
   <!-- Messages -->
   <div id="messages">
@@ -36,7 +36,9 @@
             </ol>
 
             <%= form_with url: recipes_path, method: :post do |f| %>
-              <%= f.select "recipe[meal_plan_id]", @meal_plans.order(:date).map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
+              <%= f.select "recipe[meal_plan_id]",
+              @meal_plans.map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
+              selected: ["#{@meal_plan.date} #{@meal_plan.meal_type}", @meal_plan.id],
               class: "btn btn-info" %>
               <%= hidden_field_tag "recipe[name]", recipe["name"] %>
               <%= hidden_field_tag "recipe[ingredients]", recipe["ingredients"].map { |i| "#{i['ingredient']} - #{i['quantity']}" }.join(", ") %>
