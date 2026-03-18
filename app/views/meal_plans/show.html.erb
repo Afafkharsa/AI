@@ -9,11 +9,11 @@
           <h1 class="text-success">🧑‍🍳<%= @meal_plan.meal %></h1>
           <p><strong>Date:</strong> <%= @meal_plan.date.strftime("%d %B %Y") %></p>
           <hr>
-
+        <!--Display all meal-->
           <% if @meal_plan.recipes.any? %>
           <% @meal_plan.recipes.each do |recipe| %>
               <div class="mb-4">
-                <h3>How to cook: <%= recipe.name %></h3>
+                <h3>How to cook: <span class="text-success"><%= recipe.name %></span></h3>
                 <p><strong>Calories:</strong> <%= recipe.calories %> kcal</p>
                 <p><strong>Ingredients:</strong> <%= recipe.ingredients %></p>
                 <p><strong>Method:</strong></p>
