@@ -15,15 +15,19 @@
                 <div class="card-header">
                   <strong style="font-size: 1.1rem;"><%= meal.date %> - <%= meal.meal_type %></strong>
                 </div>
-                <ul class="card-body mb-1 ">
-                <h5>🍔<strong><%= link_to meal.meal.capitalize, meal_plan_path(meal),
-          class: "meal-link, font-weight: 600, text-success", style: "text-decoration: none; cursor: pointer; color: inherit;" %> </strong></h5>
+                <div class="card-body mb-1 ">
+                  <h5>🍔<strong>
+                    <%= link_to meal.meal.capitalize, meal_plan_path(meal),
+                    class: "meal-link, font-weight: 600, text-success",
+                    style: "text-decoration: none; cursor: pointer; color: inherit;" %>
+                    </strong>
+                  </h5>
                   <% meal.recipes.each do |recipe| %>
-                  <li class="list-group-item">
-                    <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe) %>
-                  </li>
+                    <%= link_to recipe.name, meal_plan_recipe_path(meal, recipe),
+                    class: "list-group-item list-group-item-action list-group-item-light"
+                    %>
                   <% end %>
-                </ul>
+                </div>
               </div>
               <% end %>
           </div>
