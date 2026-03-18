@@ -39,6 +39,7 @@ meal_plan_3 = MealPlan.create!(
 )
 
 puts "Creating recipes..."
+
 Recipe.create!(
   name: "Chickpea Salad",
   ingredients: "1 cup chickpeas, cucumber, olive oil, lemon",
@@ -70,3 +71,59 @@ Recipe.create!(
 )
 
 puts "Finished! Created #{User.count} users, #{MealPlan.count} meal plans and #{Recipe.count} recipes"
+
+puts "Creating chat..."
+
+chat_1 = Chat.create!(
+  user: user,
+  title: "High protein recipe",
+)
+
+puts "Creating chat message"
+
+Message.create!(
+  chat: chat_1,
+  role: "user",
+  content: "You are a recipe assistant, helping users find and create recipes.
+  I am a user looking to discover new recipes, get cooking instructions and
+  track my calories. Help me find, suggest and create recipes. Always structure
+  your recipe with: - Name - Ingredients with quantities - Step by step method -
+  Total calories - Allergens. Suggest me a high protecin recipe.
+  Answer in json with following keys : name, ingredients, method, keywords,
+  calories, allergens. For exemple high protein is a keyword"
+)
+
+Message.create!(
+  chat: chat_1,
+  role: "assistant",
+  content: '
+    {
+      "name": "High-Protein Greek Yogurt Chicken Salad",
+      "ingredients": [
+        {"ingredient": "cooked chicken breast, shredded", "quantity": "150 g"},
+        {"ingredient": "plain nonfat Greek yogurt", "quantity": "120 g"},
+        {"ingredient": "celery, finely chopped", "quantity": "50 g"},
+        {"ingredient": "red onion, finely chopped", "quantity": "20 g"},
+        {"ingredient": "lemon juice", "quantity": "1 tablespoon"},
+        {"ingredient": "Dijon mustard", "quantity": "1 teaspoon"},
+        {"ingredient": "salt", "quantity": "1/4 teaspoon"},
+        {"ingredient": "black pepper", "quantity": "1/4 teaspoon"},
+        {"ingredient": "fresh parsley, chopped", "quantity": "1 tablespoon"}
+      ],
+      "method": [
+        "Place the shredded cooked chicken breast in a large bowl.",
+        "Add the Greek yogurt, lemon juice, and Dijon mustard.",
+        "Mix in the chopped celery, red onion, and parsley.",
+        "Season with salt and black pepper.",
+        "Stir everything together until well combined and creamy.",
+        "Serve immediately or refrigerate for 30 minutes to enhance the flavor."
+      ],
+      "keywords": ["high protein", "healthy", "low carb", "quick meal"],
+      "calories": 310,
+      "allergens": ["dairy", "mustard"]
+    }
+  '
+)
+
+
+puts "Finished! Created #{Chat.count} chat(s) and #{Message.count} messages"
