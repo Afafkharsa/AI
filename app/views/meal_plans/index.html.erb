@@ -1,5 +1,5 @@
 <div class="container mt-4 fw_bold">
-  <h1 class="text-info"  style= "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); ">My meal plans</h1>
+  <h1 class="text-black" style= "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); ">My meal plans</h1>
 
   <div class="container">
     <div class="row g-4 text-center">
@@ -11,7 +11,7 @@
           <h2 style= "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 8">Today's meal plans</h2>
           <div class="d-flex justify-content-start">
             <% @today_meals.each do |meal| %>
-              <div class="card col-3 text-bg-light m-2" style="border-radius: 15px 15px 0 0;">
+              <div class="card col-3 text-bg-light m-2" style="border-radius: 15px 15px 0 0; background-color: rgba(255, 255, 255, 0.8) !important;">
                 <div class="card-header">
                   <strong style="font-size: 1.1rem;"><%= meal.date %> - <%= meal.meal_type %></strong>
                 </div>
@@ -35,11 +35,11 @@
 
         <!-- Weekly meal plan Section -->
         <div class="container-weekly mt-4">
-          <h2 class="mb-4 text-white" style= "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">This week meal plans</h2>
+          <h2 class="mb-4 text-black" style= "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">This week meal plans</h2>
           <div class="d-flex flex-row flex-nowrap overflow-auto pb-3">
             <% @weekly_meals.group_by(&:date).each do |date, day_meals| %>
               <div class="me-3" style="min-width: 280px;">
-                <div class="card shadow-sm h-100" style="border-radius: 15px; border: 1px solid #eee; background-color: rgba(255, 255, 255, 0.6) !important;">
+                <div class="card shadow-sm h-100" style="border-radius: 15px; border: 1px solid #eee; background-color: rgba(255, 255, 255, 0.8) !important;">
                   <div class="card-header bg-transparent text-black text-center py-2" style="border-radius: 15px 15px 0 0;">
                     <strong style="font-size: 1.1rem;"><%= date.strftime("%A, %d %B") %></strong>
                   </div>
@@ -74,7 +74,7 @@
 
       <%# Chatbot and meal plan create %>
       <div class="col-md-3">
-        <h2 class="mt-4" style= "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Tools</h2>
+        <h2 class="mt-4" style= "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Tools🔧</h2>
 
         <div class="form-actions text-center mt-3 ">
           <%= link_to chats_path(chat: {status: "Pending", title: "Untitled"}),
@@ -89,7 +89,7 @@
           <%= link_to new_meal_plan_path,
           class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
             <div class="fs-3">🗓️</div>
-            <h5 class="fw-bold mt-3">Create a New Plan</h5>
+            <h5 class="fw-bold mt-3">Create a Meal Plan</h5>
           <% end %>
         </div>
 
