@@ -73,7 +73,8 @@
         <h2 class="mt-4" style= "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Tools</h2>
 
         <div class="form-actions text-center mt-3 ">
-          <%= link_to chats_path, data: { turbo_method: :post },
+          <%= link_to chats_path(chat: {status: "Pending", title: "Untitled"}),
+          data: { turbo_method: :post },
           class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
             <div class="fs-3">🤖</div>
             <h5 class="fw-bold mt-3">Ask for a recipe</h5>

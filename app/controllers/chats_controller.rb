@@ -7,6 +7,7 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new(chat_params)
+
     unless @chat.title
       @chat.title = "Untitled"
     end
@@ -27,7 +28,10 @@ class ChatsController < ApplicationController
   end
 
   def chat_params
-    params.require(:chat).permit(:title)
+    # params.require(:chat).permit(:title)
+    permitted = params.require(:chat).permit(:title)
+    puts permitted.inspect
+    permitted
   end
 
 end
