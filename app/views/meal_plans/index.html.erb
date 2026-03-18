@@ -16,7 +16,7 @@
                   <strong style="font-size: 1.1rem;"><%= meal.date %> - <%= meal.meal_type %></strong>
                 </div>
                 <div class="card-body mb-1 ">
-                  <h5>🍔<strong>
+                  <h5>🍔  <strong>
                     <%= link_to meal.meal.capitalize, meal_plan_path(meal),
                     class: "meal-link, font-weight: 600, text-success",
                     style: "text-decoration: none; cursor: pointer; color: inherit;" %>
@@ -49,14 +49,13 @@
                       <div class="meal-item mb-2 border-bottom pb-2">
                         <span class="badge bg-dark-subtle mb-1" style="font-size: 0.7rem;"><%= m.meal_type %></span>
                         <h5 class="m-0">
-                          🍔<%= link_to m.meal.capitalize, meal_plan_path(m),
+                          🍔  <%= link_to m.meal.capitalize, meal_plan_path(m),
                               class: "text-success", style: "text-decoration: none; font-weight: 600;" %>
                           <!--API recipe show section-->
                             <% if m.recipes.any? %>
                               <% m.recipes.each do |recipe| %>
-                              <div>
-                                <% link_to recipe.name, meal_plan_path(m), class:"text_primary small",
-                                style: "text-decoration: none; font-weight: 500;" %>
+                              <div class="mt-2 ">
+                                🍣  <%= link_to recipe.name.capitalize, meal_plan_path(m), class: "text-success", style: "text-decoration: none; font-weight: 600;" %>
                               </div>
                               <% end %>
                             <% end %>
