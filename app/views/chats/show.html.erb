@@ -59,7 +59,7 @@
               <%= hidden_field_tag "recipe[calories]", recipe["calories"] %>
               <%= hidden_field_tag "recipe[allergens]", recipe["allergens"].join(", ") %>
               <%= submit_tag "Save Recipe to Meal Plan", class: "btn btn-primary" %>
-              <%= render "form", meal_plans: @meal_plan %>
+              <%# <%= render "form", meal_plans: @meal_plan %>
 
             <% end %>
 
