@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
-      redirect_to meal_plan_recipe_path(@recipe.meal_plan, @recipe)
+      redirect_to meal_plan_path(@recipe.meal_plan, @recipe)
     else
       render :new, status: :unprocessable_entry
     end
