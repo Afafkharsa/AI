@@ -19,7 +19,17 @@
 
   <h3>Ingredients</h3>
   <ul>
-    <% @recipe.ingredients.split(",").each do |ingredient| %>
+    <% raw = @recipe.ingredients.to_s.strip %>
+
+    <% ingredients =
+      if raw.include?("\n")
+        raw.split("\n")
+      else
+        raw.split(/,\s(?=[^,]+ - )/)
+      end
+    %>
+
+    <% ingredients.each do |ingredient| %>
       <li><%= ingredient.strip %></li>
     <% end %>
   </ul>

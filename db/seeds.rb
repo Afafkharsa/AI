@@ -42,7 +42,7 @@ puts "Creating recipes..."
 
 Recipe.create!(
   name: "Chickpea Salad",
-  ingredients: "1 cup chickpeas, cucumber, olive oil, lemon",
+  ingredients: "chickpeas - 1 cup\ncucumber - 1\nolive oil - 2 tbsp\nlemon - 1",
   method: "Mix chickpeas with chopped cucumber. Add olive oil and lemon. Season with salt.",
   keywords: "vegan, healthy, quick",
   calories: 350,
@@ -52,7 +52,7 @@ Recipe.create!(
 
 Recipe.create!(
   name: "Pasta with Tomato Sauce",
-  ingredients: "pasta, tomato sauce, garlic, olive oil",
+  ingredients: "pasta - 100 g\ntomato sauce - 150 g\ngarlic - 1 clove\nolive oil - 1 tbsp",
   method: "Boil pasta. Cook garlic in olive oil, add tomato sauce. Mix with pasta.",
   keywords: "vegetarian, italian",
   calories: 550,
@@ -62,7 +62,7 @@ Recipe.create!(
 
 Recipe.create!(
   name: "Grilled Chicken Bowl",
-  ingredients: "chicken breast, rice, avocado, lettuce",
+  ingredients: "chicken breast - 150 g\nrice - 100 g\navocado - 1/2\nlettuce - 1 cup",
   method: "Grill chicken. Serve with rice and sliced avocado on lettuce.",
   keywords: "high-protein, healthy",
   calories: 600,
