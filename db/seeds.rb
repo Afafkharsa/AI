@@ -12,6 +12,8 @@ puts "Cleaning database..."
 Recipe.destroy_all
 MealPlan.destroy_all
 User.destroy_all
+Chat.destroy_all
+Message.destroy_all
 
 puts "Creating users..."
 user = User.create!(email: "famble@test.com", password: "123456")
@@ -42,8 +44,8 @@ puts "Creating recipes..."
 
 Recipe.create!(
   name: "Chickpea Salad",
-  ingredients: "1 cup chickpeas, cucumber, olive oil, lemon",
-  method: "Mix chickpeas with chopped cucumber. Add olive oil and lemon. Season with salt.",
+  ingredients: "chickpeas - 1 cup\ncucumber - 1\nolive oil - 2 tbsp\nlemon - 1",
+  method: "Mix chickpeas with chopped cucumber.\nAdd olive oil and lemon.\nSeason with salt.",
   keywords: "vegan, healthy, quick",
   calories: 350,
   allergens: nil,
@@ -52,8 +54,8 @@ Recipe.create!(
 
 Recipe.create!(
   name: "Pasta with Tomato Sauce",
-  ingredients: "pasta, tomato sauce, garlic, olive oil",
-  method: "Boil pasta. Cook garlic in olive oil, add tomato sauce. Mix with pasta.",
+  ingredients: "pasta - 100 g\ntomato sauce - 150 g\ngarlic - 1 clove\nolive oil - 1 tbsp",
+  method: "Boil pasta in salted water until al dente.\nCook garlic in olive oil until fragrant.\nAdd tomato sauce and simmer for 5 minutes.\nMix sauce with cooked pasta.",
   keywords: "vegetarian, italian",
   calories: 550,
   allergens: "gluten",
@@ -62,8 +64,8 @@ Recipe.create!(
 
 Recipe.create!(
   name: "Grilled Chicken Bowl",
-  ingredients: "chicken breast, rice, avocado, lettuce",
-  method: "Grill chicken. Serve with rice and sliced avocado on lettuce.",
+  ingredients: "chicken breast - 150 g\nrice - 100 g\navocado - 1/2\nlettuce - 1 cup",
+  method: "Boil pasta in salted water until al dente.\nCook garlic in olive oil until fragrant.\nAdd tomato sauce and simmer for 5 minutes.\nMix sauce with cooked pasta.",
   keywords: "high-protein, healthy",
   calories: 600,
   allergens: nil,

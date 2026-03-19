@@ -12,8 +12,14 @@
           <% recipe = JSON.parse(message.content) %>
           <div class="card border-0 shadow-sm p-3" style="max-width: 500px;">
             <h5>🍽️ <%= recipe["name"] %></h5>
-            <p class="text-muted mb-1">🔥 <%= recipe["calories"] %> kcal &nbsp;|&nbsp; ⚠️ <%= Array(recipe["allergens"]).join(", ").presence || "No allergens" %></p>
-            <p><strong>Keywords:</strong> <%= Array(recipe["keywords"]).join(", ") %></p>
+            <p>
+              <% Array(recipe["keywords"]).each do |keyword| %>
+                <span class="badge rounded-pill bg-primary-subtle text-primary px-3 py-2 me-1">
+                  <%= keyword.strip %>
+                </span>
+              <% end %>
+            </p>
+            <p class="text-muted mb-1"><i class="fas fa-fire me-1"></i> <%= recipe["calories"] %> kcal &nbsp;|&nbsp; <i class="fas fa-exclamation-triangle me-1"></i> <%= Array(recipe["allergens"]).join(", ").presence || "No allergens" %></p>
             <details class="mb-2">
               <summary class="text-primary" style="cursor:pointer;"><strong>Ingredients</strong></summary>
               <ul class="mt-2">
@@ -48,7 +54,7 @@
                 placeholder: "Paste an image URL (optional)..." %>
             </div>
             <%= hidden_field_tag "recipe[name]", recipe["name"] %>
-            <%= hidden_field_tag "recipe[ingredients]", Array(recipe["ingredients"]).map { |i| "#{i['ingredient']} - #{i['quantity']}" }.join(", ") %>
+            <%= hidden_field_tag "recipe[ingredients]", Array(recipe["ingredients"]).map { |i| "#{i['ingredient']} - #{i['quantity']}" }.join("\n") %>
             <%= hidden_field_tag "recipe[method]", Array(recipe["method"]).join("\n") %>
             <%= hidden_field_tag "recipe[keywords]", Array(recipe["keywords"]).join(", ") %>
             <%= hidden_field_tag "recipe[calories]", recipe["calories"] %>
