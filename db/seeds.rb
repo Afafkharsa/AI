@@ -12,6 +12,8 @@ puts "Cleaning database..."
 Recipe.destroy_all
 MealPlan.destroy_all
 User.destroy_all
+Chat.destroy_all
+Message.destroy_all
 
 puts "Creating users..."
 user = User.create!(email: "famble@test.com", password: "123456")
