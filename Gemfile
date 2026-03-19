@@ -53,6 +53,9 @@ gem "devise"
 gem "ruby_llm"
 gem "redcarpet"
 
+# Calendar
+gem "simple_calendar"
+
 
 group :development, :test do
   gem "dotenv-rails"
