@@ -18,6 +18,7 @@ class RecipesController < ApplicationController
     end
 
     if @recipe.save
+      ImageGeneratorService.generate_and_attach(@recipe)
       if @meal_plan
         redirect_to meal_plan_path(@meal_plan), notice: "Recipe saved to meal plan!"
       else
