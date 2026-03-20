@@ -1,80 +1,17 @@
 <div class="container py-4">
 
-  <% unless @chat.title == "Untitled" %>
-    <h1><%= @chat.title %></h1>
-  <% end %>
-
-  <!-- Messages -->
-  <div id="messages">
-    <% @chat.messages.each do |message| %>
-      <% if message.role == "user" %>
-        <div class="d-flex justify-content-end mb-2">
-          <div class="bg-white px-3 pb-0 pt-3 rounded-pill">
-            <%= message.content %>
-          </div>
-        </div>
-      <% elsif message.role == "assistant" %>
-        <div class="d-flex justify-content-start mb-5">
-          <div class="px-3 pb-0 pt-3">
-            <% recipe = JSON.parse(message.content) %>
-            <p><strong>Name:</strong> <%= recipe["name"] %></p>
-            <p><strong>Keywords: </strong><%= recipe["keywords"].join(", ") %></p>
-            <p><strong>Calories:</strong> <%= recipe["calories"] %></p>
-            <p><strong>Allergens:</strong> <%= recipe["allergens"].join(", ") %></p>
-            <p><strong>Ingredients:</strong></p>
-            <ul>
-              <% recipe["ingredients"].each do |item| %>
-                <li><%= item["ingredient"] %> - <%= item["quantity"] %></li>
-              <% end %>
-            </ul>
-
-            <p><strong>Method:</strong></p>
-            <ol>
-              <% recipe["method"].each do |step| %>
-                <li><%= step %></li>
-              <% end %>
-            </ol>
-
-            <%# Need to be replaced by simple_form  %>
-            <%# = simple_form_for @movie do |f|
-              f.hidden :title, "some value"
-              f.input_field :category, collection: Item::CATEGORY, prompt: "Select Category"
-              f.button :submit %>
-
-            <%= form_with url: recipes_path, method: :post do |f| %>
-              <% if @meal_plan %>
-                <%= f.select "recipe[meal_plan_id]",
-                @meal_plans.map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
-                selected: ["#{@meal_plan.date} #{@meal_plan.meal_type}", @meal_plan.id],
-                class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" %>
-              <% else %>
-                <%= f.select "recipe[meal_plan_id]",
-                @meal_plans.map { |meal| ["#{meal.date} #{meal.meal_type}", meal.id] },
-                class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" %>
-              <% end %>
-              <%= hidden_field_tag "recipe[name]", recipe["name"] %>
-              <%= hidden_field_tag "recipe[ingredients]", recipe["ingredients"].map { |i| "#{i['ingredient']} - #{i['quantity']}" }.join(", ") %>
-              <%= hidden_field_tag "recipe[method]", recipe["method"].join("\n") %>
-              <%= hidden_field_tag "recipe[keywords]", recipe["keywords"].join(", ") %>
-              <%= hidden_field_tag "recipe[calories]", recipe["calories"] %>
-              <%= hidden_field_tag "recipe[allergens]", recipe["allergens"].join(", ") %>
-              <%= submit_tag "Save Recipe to Meal Plan", class: "btn btn-primary" %>
-              <%= render "form", meal_plans: @meal_plan %>
-
-            <% end %>
-
-          </div>
-        </div>
-      <% end %>
+  <h1 id="chat_title">
+    <% unless @chat.title == "Untitled" %>
+      <%= @chat.title %>
     <% end %>
+  </h1>
+
+  <div id="messages">
+    <%= render "messages/messages", messages: @chat.messages %>
   </div>
 
-  <!-- New Message Form -->
   <div id="new_message_container">
-    <%= simple_form_for [@chat, @message] do |f| %>
-      <%= f.input :content, label: "Ask a question", required: true, placeholder: "Suggest me a high protein recipe..." %>
-      <%= f.button :submit, "Send", class: "btn btn-primary" %>
-    <% end %>
+    <%= render "messages/form", chat: @chat, message: @message %>
   </div>
 
 </div>

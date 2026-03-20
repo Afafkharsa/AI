@@ -8,10 +8,20 @@ class MealPlansController < ApplicationController
   def show
     @meal_plan = MealPlan.find(params[:id])
     @recipes = @meal_plan.recipes
+    @day_meals = current_user.meal_plans.where(date: @meal_plan.date).order(:meal_type)
   end
 
   def new
     @meal_plan = MealPlan.new
+    @meal_plan.date = params[:date] if params[:date].present?
+    @meal_plan.meal_type = params[:meal_type] if params[:meal_type].present?
+    if params[:recipe_id].present?
+      @selected_recipe = Recipe.find_by(id:params[:recipe_id])
+      if @selected_recipe
+        @meal_plan.meal = @selected_recipe.name
+        @meal_plan.recipe_id = @selected_recipe.id
+      end
+    end
   end
 
   def create

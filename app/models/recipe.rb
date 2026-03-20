@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  belongs_to :meal_plan
+  belongs_to :meal_plan, optional: true
   # has_many :chats, dependent: :destroy
 
   validates :name, presence: true

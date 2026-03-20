@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  resources :recipes, only: [:create]
+  resources :recipes, only: [:index, :create, :show]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
