@@ -74,14 +74,19 @@ Recipe.create!(
 
 puts "Finished! Created #{User.count} users, #{MealPlan.count} meal plans and #{Recipe.count} recipes"
 
-puts "Creating chat..."
+puts "Creating chats..."
 
 chat_1 = Chat.create!(
   user: user,
   title: "High protein recipe",
 )
 
-puts "Creating chat message"
+chat_2 = Chat.create!(
+  user: user,
+  title: "Funny Breakfast",
+)
+
+puts "Creating chat's messages..."
 
 Message.create!(
   chat: chat_1,
@@ -121,5 +126,38 @@ Message.create!(
   '
 )
 
+Message.create!(
+  chat: chat_2,
+  role: "user",
+  content: "help me find a funny breakfast "
+)
+
+Message.create!(
+  chat: chat_1,
+  role: "assistant",
+  content: '
+    {
+      "name": "Pancake Smiley Faces",
+      "ingredients": [
+        {"ingredient": "pancake mix, shredded", "quantity": "200 g"},
+        {"ingredient": "water or milk", "quantity": "150 ml"},
+        {"ingredient": "chocolate chips", "quantity": "50 g"},
+        {"ingredient": "banana slices", "quantity": "1 banana"},
+        {"ingredient": "strawberries ", "quantity": "3 pieces"}
+      ],
+      "method": [
+        "Prepare the pancake batter according to the instructions on the mix using water or milk.",
+        "Heat a non-stick pan on medium heat and pour small amounts of batter to create pancakes.",
+        "Cook each pancake for 2-3 minutes per side until golden brown.",
+        "Use chocolate chips to create the eyes and mouth on each pancake.",
+        "Add banana slices and strawberries as additional decorations for the funny face.",
+        "Serve and enjoy your funny pancake breakfast."
+      ],
+      "keywords": ["fun breakfast", "pancakes", "decorative"],
+      "calories": 400,
+      "allergens": ["gluten", "dairy"]
+    }
+  '
+)
 
 puts "Finished! Created #{Chat.count} chat(s) and #{Message.count} messages"
