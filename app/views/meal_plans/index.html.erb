@@ -10,7 +10,7 @@
         <div class="container-daily mt-4">
 
           <!-- Today header -->
-          <h2 class="mb-4 text-black" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+          <h2 class="mb-4 text-black text-shadow"">
             🧑‍🍳 <%= Time.now().strftime("%d %B %Y") %>
           </h2>
 
@@ -19,11 +19,11 @@
 
             <div class="d-flex justify-content-between">
               <% [["🌅 Breakfast", "breakfast"], ["☀️ Lunch", "lunch"], ["🌙 Dinner", "dinner"]].each do |label, type| %>
-                  <div class="card text-bg-light rounded-4" style="background-color: rgba(255, 255, 255, 0.8) !important; width: 32%;">
+                  <div class="card text-bg-light bg-light-gray rounded-4" style="width: 32%;">
                     <% meals = @today_meals.select { |m| m.meal_type == type } %>
-                    <div class="card-header rounded-4">
+                    <div class="card-header">
                       <div class="d-flex justify-content-between ">
-                        <strong style="font-size: 1.1rem;"><%= label %></strong>
+                        <h3 class="fw-bold text-start"><%= label %></h3>
                         <% if meals.any? %>
                           ✔️
                         <% else %>
@@ -65,7 +65,7 @@
 
         <!-- Weekly meal plan Section -->
         <div class="container-weekly mt-5">
-            <h2 class="text-black" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+            <h2 class="text-black text-shadow">
               🗓️ This week meal plans
             </h2>
 
@@ -77,10 +77,19 @@
           <div class="d-flex flex-row flex-nowrap overflow-auto pb-3">
             <% @weekly_meals.group_by(&:date).each do |date, day_meals| %>
               <div class="me-3" style="width: 32%;">
-                <div class="card shadow-sm h-100" style="border-radius: 15px; border: 1px solid #eee; background-color: rgba(255, 255, 255, 0.8) !important;">
-                  <div class="card-header bg-transparent text-black text-center py-2" style="border-radius: 15px 15px 0 0;">
-                    <strong style="font-size: 1.1rem;"><%= date.strftime("%A, %d %B") %></strong>
+                <div class="card shadow-sm h-100 rounded-4" style="border: 1px solid #eee;">
+                  <div class="card-header">
+                    <div class="d-flex justify-content-between ">
+                        <h3 class="fw-bold text-start"><%= date.strftime("%A, %d %B") %></h3>
+                        <% if day_meals.size < 3 %>
+                         <%= link_to "➕", new_meal_plan_path(date: date),
+                            style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
+                        <% else %>
+                          ✔️
+                        <% end %>
+                      </div>
                   </div>
+
                   <div class="card-body bg-transparent">
                     <% day_meals.sort_by { |m| ["Breakfast", "Lunch", "Dinner"].index(m.meal_type) || 99 }
                                 .group_by(&:meal_type).each do |meal_type, meals| %>
@@ -122,7 +131,7 @@
       <%# Chatbot and meal plan create %>
       <div class="col-md-3">
         <div class="container-daily mt-4">
-          <h2 class="mb-4 text-black" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">🔧 Tools</h2>
+          <h2 class="mb-4 text-black text-shadow">🔧 Tools</h2>
 
           <div class="form-actions text-center mt-3">
             <%= link_to chats_path(chat: {status: "Pending", title: "Untitled"}),
