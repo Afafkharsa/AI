@@ -10,7 +10,7 @@
         <div class="container-daily mt-4">
 
           <!-- Today header -->
-          <h2 class="mb-4 text-black" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+          <h2 class="mb-4 text-black text-shadow"">
             🧑‍🍳 <%= Time.now().strftime("%d %B %Y") %>
           </h2>
 
@@ -19,13 +19,21 @@
 
             <div class="d-flex justify-content-between">
               <% [["🌅 Breakfast", "breakfast"], ["☀️ Lunch", "lunch"], ["🌙 Dinner", "dinner"]].each do |label, type| %>
-                  <div class="card text-bg-light rounded-4" style="background-color: rgba(255, 255, 255, 0.8) !important; width: 32%;">
-
-                    <div class="card-header rounded-4">
-                      <strong style="font-size: 1.1rem;"><%= label %></strong>
+                  <div class="card text-bg-light bg-light-gray rounded-4" style="width: 32%;">
+                    <% meals = @today_meals.select { |m| m.meal_type == type } %>
+                    <div class="card-header">
+                      <div class="d-flex justify-content-between ">
+                        <h3 class="fw-bold text-start"><%= label %></h3>
+                        <% if meals.any? %>
+                          ✔️
+                        <% else %>
+                         <%= link_to "➕", new_meal_plan_path(date: DateTime.now, meal_type: type),
+                            style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
+                        <% end %>
+                      </div>
                     </div>
                     <div class="card-body mb-1">
-                      <% meals = @today_meals.select { |m| m.meal_type == type } %>
+
                       <% if meals.any? %>
                         <% meals.each do |meal| %>
                         <div class="d-flex justify-content-between ">
@@ -43,13 +51,8 @@
                         </div>
                         <% end %>
                       <% else %>
-                        <div class="d-flex justify-content-between ">
-                          <div class="meal-link, font-weight: 600, text-success", style="color: inherit; font-weight: 600; ">
-                            No meal planned.
-                          </div>
-                          <%= link_to "➕", new_meal_plan_path(date: DateTime.now, meal_type: type),
-                          style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
-
+                        <div class="meal-link, text-success text-start", style="color: inherit; font-weight: 600; ">
+                          No meal planned.
                         </div>
                     <% end %>
                     </div>
@@ -61,28 +64,49 @@
         </div>
 
         <!-- Weekly meal plan Section -->
-        <div class="container-weekly mt-4">
-          <h2 class="mb-4 text-black" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
-            This week meal plans
-          </h2>
+        <div class="container-weekly mt-5">
+            <h2 class="text-black text-shadow">
+              🗓️ This week meal plans
+            </h2>
+
+          <div class= "mb-4" style="font-size: 1.1rem;">
+            <%= link_to "Create a meal plan ➕", new_meal_plan_path, class: "meal-link, text-black",
+                          style: "text-decoration: none; cursor: pointer; color: inherit; font-weight: 600; "  %>
+          </div>
 
           <div class="d-flex flex-row flex-nowrap overflow-auto pb-3">
             <% @weekly_meals.group_by(&:date).each do |date, day_meals| %>
               <div class="me-3" style="width: 32%;">
-                <div class="card shadow-sm h-100" style="border-radius: 15px; border: 1px solid #eee; background-color: rgba(255, 255, 255, 0.8) !important;">
-                  <div class="card-header bg-transparent text-black text-center py-2" style="border-radius: 15px 15px 0 0;">
-                    <strong style="font-size: 1.1rem;"><%= date.strftime("%A, %d %B") %></strong>
+                <div class="card shadow-sm h-100 rounded-4" style="border: 1px solid #eee;">
+                  <div class="card-header">
+                    <div class="d-flex justify-content-between ">
+                        <h3 class="fw-bold text-start"><%= date.strftime("%A, %d %B") %></h3>
+                        <% if day_meals.size < 3 %>
+                         <%= link_to "➕", new_meal_plan_path(date: date),
+                            style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
+                        <% else %>
+                          ✔️
+                        <% end %>
+                      </div>
                   </div>
+
                   <div class="card-body bg-transparent">
                     <% day_meals.sort_by { |m| ["Breakfast", "Lunch", "Dinner"].index(m.meal_type) || 99 }
                                 .group_by(&:meal_type).each do |meal_type, meals| %>
-                      <div class="meal-item mb-2 border-bottom pb-2">
-                        <span class="badge bg-dark-subtle mb-1" style="font-size: 0.7rem;"><%= meal_type %></span>
+
+                      <div class="meal-item pb-2">
+                        <span class="badge bg-dark-subtle mb-1" style="font-size: 0.7rem;">
+                          <%= meal_type %>
+                        </span>
                         <% meals.each do |m| %>
-                          <h5 class="m-0">
+                          <div class="d-flex justify-content-between ">
                             <%= link_to m.meal.capitalize, meal_plan_path(m),
-                                class: "text-success", style: "text-decoration: none; font-weight: 600;" %>
-                            <% if m.recipes.any? %>
+                            class: "text-success", style: "text-decoration: none; font-weight: 600;" %>
+                            <%= link_to "✏️", edit_meal_plan_path(m),
+                            style: "text-decoration: none; cursor: pointer; color: inherit;"   %>
+                          </div>
+                          <% if m.recipes.any? %>
+                            <div class="mt-2 border-top">
                               <% m.recipes.each do |recipe| %>
                                 <div class="mt-2">
                                   <%= link_to recipe.name.capitalize, meal_plan_path(m),
@@ -90,8 +114,8 @@
                                       style: "text-decoration: none; font-weight: 600; font-size: 0.85rem;" %>
                                 </div>
                               <% end %>
-                            <% end %>
-                          </h5>
+                            </div>
+                          <% end %>
                         <% end %>
                       </div>
                     <% end %>
@@ -107,27 +131,17 @@
       <%# Chatbot and meal plan create %>
       <div class="col-md-3">
         <div class="container-daily mt-4">
-          <h2 class="mb-4 text-black" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
-            Tools🔧
-          </h2>
+          <h2 class="mb-4 text-black text-shadow">🔧 Tools</h2>
 
           <div class="form-actions text-center mt-3">
             <%= link_to chats_path(chat: {status: "Pending", title: "Untitled"}),
             data: { turbo_method: :post },
-            class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white rounded-4" do %>
+            class: "card h-100 border-0 shadow-sm p-3 text-decoration-none text-dark rounded-4",
+            style: "background-color: rgba(255, 255, 255, 0.8) !important" do %>
               <div class="fs-3">🤖</div>
               <h5 class="fw-bold mt-3">Ask for a recipe</h5>
             <% end %>
           </div>
-
-          <div class="form-actions text-center mt-3">
-            <%= link_to new_meal_plan_path,
-            class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white rounded-4" do %>
-              <div class="fs-3">🗓️</div>
-              <h5 class="fw-bold mt-3">Create a Meal Plan</h5>
-            <% end %>
-          </div>
-        </div>
 
       </div>
 
