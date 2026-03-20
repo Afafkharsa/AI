@@ -1,5 +1,5 @@
 <div class="container mt-4 fw_bold">
-  <h1 class="text-black" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">My meal plans</h1>
+  <h1 class="text-black text-shadow">My meal plans</h1>
 
   <div class="container">
     <div class="row g-4 text-center">
@@ -37,8 +37,8 @@
                       <% if meals.any? %>
                         <% meals.each do |meal| %>
                         <div class="d-flex justify-content-between ">
-                          <%= link_to meal.meal, meal_plan_path(meal), class: "meal-link, text-success",
-                          style: "text-decoration: none; cursor: pointer; color: inherit; font-weight: 600; " %>
+                          <%= link_to meal.meal, meal_plan_path(meal), class: "meal-link, text-success fw-semibold",
+                          style: "text-decoration: none; cursor: pointer; color: inherit;" %>
                           <%= link_to "✏️", edit_meal_plan_path(meal),
                           style: "text-decoration: none; cursor: pointer; color: inherit;"   %>
                         </div>
@@ -51,7 +51,7 @@
                         </div>
                         <% end %>
                       <% else %>
-                        <div class="meal-link, text-success text-start", style="color: inherit; font-weight: 600; ">
+                        <div class="meal-link, text-success text-start fw-semibold", style="color: inherit; ">
                           No meal planned.
                         </div>
                     <% end %>
@@ -80,7 +80,7 @@
                 <div class="card shadow-sm h-100 rounded-4" style="border: 1px solid #eee;">
                   <div class="card-header">
                     <div class="d-flex justify-content-between ">
-                        <h3 class="fw-bold text-start"><%= date.strftime("%A, %d %B") %></h3>
+                        <h3 class="fw-semibold text-start"><%= date.strftime("%A, %d %B") %></h3>
                         <% if day_meals.size < 3 %>
                          <%= link_to "➕", new_meal_plan_path(date: date),
                             style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
@@ -136,10 +136,9 @@
           <div class="form-actions text-center mt-3">
             <%= link_to chats_path(chat: {status: "Pending", title: "Untitled"}),
             data: { turbo_method: :post },
-            class: "card h-100 border-0 shadow-sm p-3 text-decoration-none text-dark rounded-4",
-            style: "background-color: rgba(255, 255, 255, 0.8) !important" do %>
-              <div class="fs-3">🤖</div>
-              <h5 class="fw-bold mt-3">Ask for a recipe</h5>
+            class: "card h-100 border-0 shadow-sm p-3 text-decoration-none text-dark rounded-4 bg-light-gray" do %>
+              <div class="fs-4">🤖</div>
+              <p class="fw-bold mt-2 fs-3">Ask for a recipe</p>
             <% end %>
           </div>
 
