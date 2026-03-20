@@ -86,13 +86,7 @@ puts "Creating chat message"
 Message.create!(
   chat: chat_1,
   role: "user",
-  content: "You are a recipe assistant, helping users find and create recipes.
-  I am a user looking to discover new recipes, get cooking instructions and
-  track my calories. Help me find, suggest and create recipes. Always structure
-  your recipe with: - Name - Ingredients with quantities - Step by step method -
-  Total calories - Allergens. Suggest me a high protecin recipe.
-  Answer in json with following keys : name, ingredients, method, keywords,
-  calories, allergens. For exemple high protein is a keyword"
+  content: "Help me find a high-protein recipe"
 )
 
 Message.create!(
