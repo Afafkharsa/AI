@@ -42,7 +42,7 @@ meal_plan_3 = MealPlan.create!(
 
 puts "Creating recipes..."
 
-Recipe.create!(
+recipe = Recipe.create!(
   name: "Chickpea Salad",
   ingredients: "chickpeas - 1 cup\ncucumber - 1\nolive oil - 2 tbsp\nlemon - 1",
   method: "Mix chickpeas with chopped cucumber.\nAdd olive oil and lemon.\nSeason with salt.",
@@ -52,7 +52,7 @@ Recipe.create!(
   meal_plan: meal_plan_1
 )
 
-Recipe.create!(
+recipe = Recipe.create!(
   name: "Pasta with Tomato Sauce",
   ingredients: "pasta - 100 g\ntomato sauce - 150 g\ngarlic - 1 clove\nolive oil - 1 tbsp",
   method: "Boil pasta in salted water until al dente.\nCook garlic in olive oil until fragrant.\nAdd tomato sauce and simmer for 5 minutes.\nMix sauce with cooked pasta.",
@@ -62,7 +62,7 @@ Recipe.create!(
   meal_plan: meal_plan_2
 )
 
-Recipe.create!(
+recipe = Recipe.create!(
   name: "Grilled Chicken Bowl",
   ingredients: "chicken breast - 150 g\nrice - 100 g\navocado - 1/2\nlettuce - 1 cup",
   method: "Boil pasta in salted water until al dente.\nCook garlic in olive oil until fragrant.\nAdd tomato sauce and simmer for 5 minutes.\nMix sauce with cooked pasta.",
@@ -73,6 +73,15 @@ Recipe.create!(
 )
 
 puts "Finished! Created #{User.count} users, #{MealPlan.count} meal plans and #{Recipe.count} recipes"
+
+
+puts "Generating AI photo..."
+
+ImageGeneratorService.generate_and_attach(recipe)
+sleep 5
+
+puts "Generated photo successful!"
+
 
 puts "Creating chats..."
 
