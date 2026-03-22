@@ -6,9 +6,12 @@ class ImageGeneratorService
     client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
 
     # 2. Generate photo
+    prompt_text = "Professional food photography of #{recipe.name}. " \
+              "Main ingredients include: #{recipe.keywords}. " \
+              "High resolution, 8k, studio lighting, top-down view, delicious look."
+
     response = client.images.generate(parameters: {
-      prompt: "Professional food photography of #{recipe.name}, #{recipe.keywords}, high resolution, studio lighting",
-      size: "512x512"
+      prompt: prompt_text, size: "512x512"
     })
 
     # 3. use photo URL
