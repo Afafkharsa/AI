@@ -50,14 +50,18 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "devise"
-gem "ruby_llm"
 gem "redcarpet"
 
+# AI gems
+gem "ruby_llm"
+gem "ruby-openai"
+
+# ActionCable to use Websocket
+gem "solid_cable"
 
 # Calendar
 gem "simple_calendar"
 
-gem "ruby-openai"
 
 
 group :development, :test do
