@@ -142,7 +142,7 @@ Message.create!(
 )
 
 Message.create!(
-  chat: chat_1,
+  chat: chat_2,
   role: "assistant",
   content: '
     {
