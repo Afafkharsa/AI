@@ -169,4 +169,40 @@ Message.create!(
   '
 )
 
+Message.create!(
+  chat: chat_2,
+  role: "user",
+  content: "funny breakfast but not pancakes"
+)
+
+Message.create!(
+  chat: chat_2,
+  role: "assistant",
+  content: '
+    {
+      "name": "Egg & Toast Funny Animal Faces",
+      "ingredients": [
+        {"ingredient": "sliced bread", "quantity": "2 slices"},
+        {"ingredient": "hard-boiled eggs", "quantity": "2 eggs"},
+        {"ingredient": "cherry tomatoes", "quantity": "4"},
+        {"ingredient": "cucumber", "quantity": "1 small, sliced"},
+        {"ingredient": "black olives", "quantity": "4"},
+        {"ingredient": "cream cheese", "quantity": "2 tbsp"},
+        {"ingredient": "carrot", "quantity": "1 small, sliced into thin sticks"}
+      ],
+      "method": [
+        "Toast the slices of bread until golden brown.",
+        "Spread cream cheese evenly over each slice of toast.",
+        "Cut the hard-boiled eggs into slices and place them on the toast as the base for the face.",
+        "Use cucumber slices for eyes, cherry tomatoes for cheeks, and black olives for pupils.",
+        "Arrange carrot sticks to make whiskers or ears to complete the animal faces.",
+        "Serve immediately and enjoy the playful presentation!"
+      ],
+      "keywords": ["fun breakfast", "animal faces", "kids meal"],
+      "calories": 320,
+      "allergens": ["gluten", "dairy", "eggs"]
+    }
+  '
+)
+
 puts "Finished! Created #{Chat.count} chat(s) and #{Message.count} messages"
