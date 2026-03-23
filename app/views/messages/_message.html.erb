@@ -11,7 +11,7 @@
   <div class="d-flex justify-content-start mb-5" id="<%= dom_id(message) %>">
     <div class="px-3 pb-0 pt-3">
 
-      <% if message.content.present? ? %>
+      <% if message.content.present? %>
 
         <% begin %>
           <% recipe = JSON.parse(message.content) %>
