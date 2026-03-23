@@ -4,6 +4,7 @@ class Message < ApplicationRecord
   belongs_to :chat
 
   validate :user_message_limit, if: -> { role=="user" }
+  validates :content, length: { minimum: 10, maximum: 1000 }, if: -> { role == "user" }
 
   private
 
