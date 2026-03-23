@@ -66,10 +66,13 @@ class MessagesController < ApplicationController
     @message.role = "user"
 
     if @message.save
-      @ruby_llm_chat = RubyLLM.chat(model: "gpt-4o")
-      build_conversation_history
-      response = @ruby_llm_chat.with_instructions(SYSTEM_PROMPT).ask(@message.content)
-      @chat.messages.create(role: "assistant", content: response.content)
+      @assistant_message = @chat.messages.create(role: "assistant", content: "")
+
+      send_question
+
+      @assistant_message.update(content: @response.content)
+      broadcast_replace(@assistant_message)
+
       @chat.generate_title_from_first_message
 
       respond_to do |format|
@@ -88,7 +91,31 @@ class MessagesController < ApplicationController
 
   def build_conversation_history
     @chat.messages.each do |message|
+      next if message.content.blank?
+
       @ruby_llm_chat.add_message(role: message.role, content: message.content)
+    end
+  end
+
+  def broadcast_replace(message)
+    Turbo::StreamsChannel.broadcast_replace_to(
+      @chat,
+      target: helpers.dom_id(message),
+      partial: "messages/message",
+      locals: { message: message }
+    )
+  end
+
+  def send_question(model: "gpt-4o", with: {})
+    @ruby_llm_chat = RubyLLM.chat(model: model)
+
+    build_conversation_history
+
+    @response = @ruby_llm_chat.with_instructions(SYSTEM_PROMPT).ask(@message.content, with: with) do |chunk|
+      next if chunk.content.blank?
+
+      @assistant_message.content += chunk.content
+      broadcast_replace(@assistant_message)
     end
   end
 
