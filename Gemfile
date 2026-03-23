@@ -53,8 +53,11 @@ gem "devise"
 gem "ruby_llm"
 gem "redcarpet"
 
+
 # Calendar
 gem "simple_calendar"
+
+gem "ruby-openai"
 
 
 group :development, :test do

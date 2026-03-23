@@ -18,6 +18,9 @@ class RecipesController < ApplicationController
     end
 
     if @recipe.save
+      ImageGeneratorService.generate_and_attach(@recipe)
+      sleep 5
+
       if @meal_plan
         redirect_to meal_plan_path(@meal_plan), notice: "Recipe saved to meal plan!"
       else
@@ -31,6 +34,12 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+  end
+
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    redirect_to recipes_path, notice: "Recipe was deleted!", status: :see_other
   end
 
   private
