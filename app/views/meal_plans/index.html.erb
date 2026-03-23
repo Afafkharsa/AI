@@ -24,9 +24,7 @@
                     <div class="card-header">
                       <div class="d-flex justify-content-between ">
                         <h3 class="fw-bold text-start"><%= label %></h3>
-                        <% if meals.any? %>
-                          ✔️
-                        <% else %>
+                        <% unless meals.any? %>
                          <%= link_to "➕", new_meal_plan_path(date: DateTime.now, meal_type: type),
                             style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
                         <% end %>
@@ -39,14 +37,24 @@
                         <div class="d-flex justify-content-between ">
                           <%= link_to meal.meal, meal_plan_path(meal), class: "meal-link, text-success fw-semibold",
                           style: "text-decoration: none; cursor: pointer; color: inherit;" %>
-                          <%= link_to "✏️", edit_meal_plan_path(meal),
-                          style: "text-decoration: none; cursor: pointer; color: inherit;"   %>
+                          <div>
+                            <%= link_to "✏️", edit_meal_plan_path(meal),
+                            style: "text-decoration: none; cursor: pointer; color: inherit;"   %>
+                            <%= link_to "🥣", chats_path(chat: {title: meal.meal}),
+                            data: { turbo_method: :post },
+                            style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
+                          </div>
                         </div>
                         <div>
                           <% meal.recipes.each do |recipe| %>
-                            <%= link_to "🍽️ #{recipe.name}  — 🔥#{recipe.calories} kcal", meal_plan_recipe_path(meal, recipe),
-                            class: "list-group-item list-group-item-action list-group-item-light",
-                            style: "text-decoration: none; font-weight: 600; font-size: 0.85rem; text-align: justify;"  %>
+                            <div class="d-flex justify-content-between ">
+                              <%= link_to "🍽️ #{recipe.name}  — 🔥#{recipe.calories} kcal", meal_plan_recipe_path(meal, recipe),
+                              class: "list-group-item list-group-item-action list-group-item-light  fw-semibold",
+                              style: "text-decoration: none; font-size: 0.85rem; text-align: justify;"  %>
+                              <%= link_to "🗑️", recipe_path(recipe),
+                              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                              style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
+                            </div>
                           <% end %>
                         </div>
                         <% end %>
@@ -102,15 +110,20 @@
                           <div class="d-flex justify-content-between ">
                             <%= link_to m.meal.capitalize, meal_plan_path(m),
                             class: "text-success", style: "text-decoration: none; font-weight: 600;" %>
-                            <%= link_to "✏️", edit_meal_plan_path(m),
-                            style: "text-decoration: none; cursor: pointer; color: inherit;"   %>
+                            <div>
+                              <%= link_to "✏️", edit_meal_plan_path(m),
+                              style: "text-decoration: none; cursor: pointer; color: inherit;"   %>
+                              <%= link_to "🥣", chats_path(chat: {title: m.meal}),
+                              data: { turbo_method: :post },
+                              style: "text-decoration: none; cursor: pointer; color: inherit;"  %>
+                            </div>
                           </div>
                           <% if m.recipes.any? %>
                             <div class="mt-2 border-top">
                               <% m.recipes.each do |recipe| %>
                                 <div class="mt-2">
                                   <%= link_to recipe.name.capitalize, meal_plan_path(m),
-                                      class: "text-success",
+                                      class: "text-dark",
                                       style: "text-decoration: none; font-weight: 600; font-size: 0.85rem;" %>
                                 </div>
                               <% end %>
