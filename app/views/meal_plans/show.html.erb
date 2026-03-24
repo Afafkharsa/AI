@@ -34,8 +34,8 @@
           <%= form_with url: chats_path, method: :post do |f| %>
             <%= hidden_field_tag "chat[title]", @meal_plan.meal %>
             <%= button_tag(type: 'submit',
-            class: "card h-100 w-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white") do %>
-              <div class="fs-3">🤖</div>
+            class: "card h-100 w-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white d-flex flex-column justify-content-center align-items-center") do %>
+              <div class="fs-3"><i class="fa-solid fa-robot"></i></div>
               <h5 class="">Ask for a recipe</h5>
             <% end %>
           <% end %>
@@ -44,14 +44,14 @@
         <div class="form-actions mt-2 text-center">
           <%= link_to edit_meal_plan_path(@meal_plan),
           class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
-            <div class="fs-3">📝</div>
+            <div class="fs-3"><i class="fa-solid fa-pen-to-square"></i></div>
             <h5 class="fw-bold mt-3">Edit Plan</h5>
           <% end %>
         </div>
         <div class="form-actions mt-2 text-center">
           <%= link_to meal_plan_path(@meal_plan), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
           class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark bg-white" do %>
-            <div class="fs-3">🗑️</div>
+            <div class="fs-3"><i class="fa-regular fa-trash-can"></i></div>
             <h5 class="fw-bold mt-3">Delete plan</h5>
           <% end %>
         </div>
