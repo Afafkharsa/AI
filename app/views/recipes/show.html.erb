@@ -12,11 +12,10 @@
 
         <p>
           <% @recipe.keywords.to_s.split(",").each do |keyword| %>
-        <span class="badge rounded-pill bg-primary-subtle text-primary px-3 py-2 me-1">
-          <%= keyword %>
-        </span>
-      <% end %>
-          </span>
+            <span class="badge rounded-pill bg-primary-subtle text-primary px-3 py-2 me-1">
+              <%= keyword %>
+            </span>
+          <% end %>
         </p>
 
         <p class="text-muted mb-1">
