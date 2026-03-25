@@ -26,9 +26,9 @@
                   style: "text-decoration: none; cursor: pointer; color: inherit; font-size: 0.85rem;"  %>
                 </div>
                 <p><strong>Calories:</strong> <%= recipe.calories %> kcal</p>
-                <p class="text-left">
+                <p class="text-left mb-0">
                   <strong>Ingredients:</strong>
-                  <ul class="text-left">
+                  <ul class="mt-0">
                     <% raw = recipe.ingredients.to_s.strip %>
                     <% ingredients = raw.include?("\n") ? raw.split("\n") : raw.split(/, \s(?=[^,]+ + - )/) %>
                     <% ingredients.each do |ingredient| %>
