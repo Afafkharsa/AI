@@ -50,8 +50,18 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "devise"
-gem "ruby_llm"
 gem "redcarpet"
+
+# AI gems
+gem "ruby_llm"
+gem "ruby-openai"
+
+# ActionCable to use Websocket
+gem "solid_cable"
+
+# Calendar
+gem "simple_calendar"
+
 
 
 group :development, :test do
@@ -69,6 +79,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # For debugging
+  gem "pry-byebug"
+  gem "pry-rails"
 end
 
 group :test do

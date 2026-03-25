@@ -1,21 +1,25 @@
 <!-- Hero Section -->
-<div class="container text-center py-5">
+
+<div class="container text-center py-3 text-yellow">
   <div class="row justify-content-center">
     <div class="col-md-8">
 
-      <h1 class="display-4 fw-bold">Your personal AI <br> meal planner 🥗</h1>
+      <h1 class="display-4 fw-bold text-shadow">Your personal AI <br> meal planner 🥗</h1>
 
-      <p class="lead text-muted mt-3">
+      <p class="lead mt-3 text-black-50">
         Chat with our AI chef to discover recipes, build weekly meal plans
         and track your calories — all in one place.
       </p>
 
       <div class="d-flex justify-content-center gap-3 mt-4">
         <% if user_signed_in? %>
-          <%= link_to "See how it works", "#features", class: "btn btn-outline-secondary btn-lg" %>
+          <%= link_to "See how it works", "#features",
+          class: "btn btn-light btn-outline-secondary btn-lg" %>
         <% else %>
-          <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %>
-          <%= link_to "See how it works", "#features", class: "btn btn-outline-secondary btn-lg" %>
+          <%= link_to "Get Started", new_user_registration_path,
+          class: "btn btn-light btn-outline-secondary btn-lg" %>
+          <%= link_to "See how it works", "#features",
+          class: "btn btn-light btn-outline-secondary btn-lg" %>
         <% end %>
       </div>
 
@@ -26,52 +30,23 @@
 <!-- Features Section -->
 <div class="container py-5" id="features">
   <div class="row g-4 text-center">
+    <div class="col-md-4">
+      <%= render "shared/ai_card" %>
+    </div>
 
     <div class="col-md-4">
-      <% if user_signed_in? %>
-        <%= link_to chats_path, data: { turbo_method: :post }, class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark" do %>
-          <div class="fs-1">🤖</div>
-          <h5 class="fw-bold mt-3">Chat with AI</h5>
-          <p class="text-muted">Ask anything — recipes, substitutions, nutrition advice.</p>
-        <% end %>
-      <% else %>
-        <%= link_to new_user_registration_path, class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark" do %>
-          <div class="fs-1">🤖</div>
-          <h5 class="fw-bold mt-3">Chat with AI</h5>
-          <p class="text-muted">Ask anything — recipes, substitutions, nutrition advice.</p>
-        <% end %>
+      <%= link_to meal_plans_path, class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark rounded-4 bg-light-gray" do %>
+          <div class="fs-1"><i class="fa-regular fa-calendar"></i></div>
+          <h6 class="fw-bold mt-3">Weekly Meal Plans</h6>
+          <p class="text-muted">Generate a full 7-day meal plan tailored to your goals.</p>
       <% end %>
     </div>
 
     <div class="col-md-4">
-      <% if user_signed_in? %>
-        <%= link_to meal_plans_path, class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark" do %>
-          <div class="fs-1">📅</div>
-          <h5 class="fw-bold mt-3">Weekly Meal Plans</h5>
-          <p class="text-muted">Generate a full 7-day meal plan tailored to your goals.</p>
-        <% end %>
-      <% else %>
-        <%= link_to new_user_registration_path, class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark" do %>
-          <div class="fs-1">📅</div>
-          <h5 class="fw-bold mt-3">Weekly Meal Plans</h5>
-          <p class="text-muted">Generate a full 7-day meal plan tailored to your goals.</p>
-        <% end %>
-      <% end %>
-    </div>
-
-    <div class="col-md-4">
-      <% if user_signed_in? %>
-        <%= link_to chats_path, class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark" do %>
-          <div class="fs-1">🔥</div>
-          <h5 class="fw-bold mt-3">Recipes</h5>
-          <p class="text-muted">Know exactly what's in every recipe. No guesswork.</p>
-        <% end %>
-      <% else %>
-        <%= link_to new_user_registration_path, class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark" do %>
-          <div class="fs-1">🔥</div>
-          <h5 class="fw-bold mt-3">Recipes</h5>
-          <p class="text-muted">Know exactly what's in every recipe. No guesswork.</p>
-        <% end %>
+      <%= link_to chats_path, class: "card h-100 border-0 shadow-sm p-4 text-decoration-none text-dark rounded-4 bg-light-gray" do %>
+        <div class="fs-1"><i class="fa-brands fa-rocketchat"></i></div>
+        <h6 class="fw-bold mt-3">Existing chats</h6>
+        <p class="text-muted">See previous AI chats. Know exactly what's in every recipe. No guesswork.</p>
       <% end %>
     </div>
 

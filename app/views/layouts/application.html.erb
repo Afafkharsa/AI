@@ -8,9 +8,22 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
   </head>
 
   <body>
+    <style>
+      body {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.8)),
+        url(<%= asset_path("bbq.png") %>);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+    </style>
     <%= link_to "Skip to main content", "#main-content", class: "visually-hidden-focusable" %>
     <header>
       <%= render "shared/navbar" %> <!-- 👈 Add this for navbar -->

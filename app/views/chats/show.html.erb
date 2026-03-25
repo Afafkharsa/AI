@@ -1,34 +1,20 @@
+<!-- Substribing to action cable -->
+<%= turbo_stream_from @chat %>
+
 <div class="container py-4">
 
-<% unless @chat.title == "Untitled" %>
-  <h1><%= @chat.title %></h1>
-<% end %>
-
-  <!-- Messages -->
-  <div id="messages">
-    <% @chat.messages.each do |message| %>
-      <% if message.role == "user" %>
-        <div class="d-flex justify-content-end mb-2">
-          <div class="bg-white px-3 pb-0 pt-3 rounded-pill">
-            <%= message.content %>
-          </div>
-        </div>
-      <% elsif message.role == "assistant" %>
-        <div class="d-flex justify-content-start mb-5">
-          <div class="px-3 pb-0 pt-3">
-            <%= raw(simple_format(message.content)) %>
-          </div>
-        </div>
-      <% end %>
+  <h1 class="text-shadow" id="chat_title">
+    <% unless @chat.title == "Untitled" %>
+      <%= @chat.title %>
     <% end %>
+  </h1>
+
+  <div id="messages">
+    <%= render "messages/messages", messages: @chat.messages %>
   </div>
 
-  <!-- New Message Form -->
-  <div id="new_message_container">
-    <%= simple_form_for [@chat, @message] do |f| %>
-      <%= f.input :content, label: "Ask a question", required: true, placeholder: "Suggest me a high protein recipe..." %>
-      <%= f.button :submit, "Send", class: "btn btn-primary" %>
-    <% end %>
+  <div id="new_message_container" class="ps-3 pb-0 pt-3">
+    <%= render "messages/form", chat: @chat, message: @message %>
   </div>
 
 </div>

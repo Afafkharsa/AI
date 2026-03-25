@@ -1,10 +1,34 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+   @recipes = Recipe.all
+  end
   def create
-    @recipe = Recipe.new(recipe_params)
-    if @recipe.save
-      redirect_to recipe_path(@recipe)
+    if params[:save_to_meal_plan]
+      @meal_plan = current_user.meal_plans.find_or_create_by(
+        date: params[:recipe][:meal_plan_date],
+        meal_type: params[:recipe][:meal_plan_type]
+      ) do |mp|
+        mp.meal = params[:recipe][:name]
+      end
+      @recipe = @meal_plan.recipes.new(recipe_params)
     else
-      render :new, status: :unprocessable_entry
+      @recipe = Recipe.new(recipe_params)
+    end
+
+    if @recipe.save
+      ImageGeneratorService.generate_and_attach(@recipe)
+      sleep 5
+
+      if @meal_plan
+        redirect_to meal_plan_path(@meal_plan), notice: "Recipe saved to meal plan!"
+      else
+        redirect_to recipes_path, notice: "Recipe saved!"
+      end
+    else
+      redirect_back fallback_location: chats_path, alert: @recipe.errors.full_messages.join(", ")
+
     end
   end
 
@@ -12,9 +36,15 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    redirect_to recipes_path, notice: "Recipe was deleted!", status: :see_other
+  end
+
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :ingredients, :method, :keywords, :calories, :allergens, :meal_plan_id)
+    params.require(:recipe).permit(:name, :ingredients, :method, :keywords, :calories, :allergens, :photo)
   end
 end

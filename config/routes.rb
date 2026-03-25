@@ -2,14 +2,15 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :meal_plans, only: [:index, :create, :show] do
-    resources :recipes, only: [:create, :show]
-
+  resources :meal_plans, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+    resources :recipes, only: [:create, :show, :destroy]
   end
 
-    resources :chats, only: [:index, :create, :show] do
-      resources :messages, only: [:create]
+  resources :chats, only: [:index, :create, :show] do
+    resources :messages, only: [:create]
   end
+
+  resources :recipes, only: [:index, :create, :show, :destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
