@@ -49,7 +49,7 @@
                           <% meal.recipes.each do |recipe| %>
                             <div class="d-flex justify-content-between ">
                               <%= link_to "🍽️ #{recipe.name}  — 🔥#{recipe.calories} kcal", meal_plan_recipe_path(meal, recipe),
-                              class: "list-group-item list-group-item-action list-group-item-light  fw-semibold",
+                              class: "list-group-item list-group-item-action list-group-item-light fw-semibold",
                               style: "text-decoration: none; font-size: 0.85rem; text-align: justify;"  %>
                               <%= link_to "🗑️", recipe_path(recipe),
                               data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
