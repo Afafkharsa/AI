@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_23_183848) do
   create_table "meal_plans", force: :cascade do |t|
     t.date "date"
     t.string "meal_type"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "meal"
