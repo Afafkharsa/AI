@@ -51,6 +51,8 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "devise"
 gem "redcarpet"
+gem "cloudinary"
+
 
 # AI gems
 gem "ruby_llm"
